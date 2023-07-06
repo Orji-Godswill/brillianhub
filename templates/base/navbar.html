@@ -34,9 +34,8 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'blog:posts' %}">Finance Calculator</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'accounts:account-home' %}">AI Based Tools</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
                 {% if request.user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Account</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Log in</a></li>

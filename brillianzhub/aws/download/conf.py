@@ -5,8 +5,8 @@ import os
 AWS_GROUP_NAME = "brillianzhub-group"
 AWS_USERNAME = "brillianzhub"
 
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "AKIAWLYOVAMUTBUSXNS6")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "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")
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "#")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "#")
 
 AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True

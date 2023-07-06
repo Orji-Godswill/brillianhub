@@ -20,6 +20,8 @@ urlpatterns = [
     path('financial-investment/', include("blog.urls")),
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('contact/', views.contact_view, name="contact"),
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
