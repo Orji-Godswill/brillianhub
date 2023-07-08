@@ -1,31 +1,69 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-{% for post in post %}
-<div class="row">
-    <div class="col-lg-12 col-md-12 mx-auto text-left">
-        <div class="post-preview">
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
 
-            <div class="row">
-                {% if post.image %}
-                <div class="col-lg-4 col-md-4 mx-auto column">
-                    <div class="card">
-                        <img src="{{ post.image.url }}" alt="Snow" style="width:100%">
-                    </div>
-                </div>
-                {% endif %}
-                <div class="col-lg-8 col-md-8 mx-auto">
-                    <a href="{% url 'blog:post-detail' slug=post.slug %}">
-                        <h4 class="card-title">{{ post.title }}</h4>
-                        <h5 class="post-subtitle">{{ post.description }}</h5>
-                    </a>
-                    <p style="font-style: italic;" id="postviews3">Posted on: {{ post.publish }}</p>
-                    <p class="card-text" align=justify>{{ post.body|striptags|safe|truncatechars:180 }}</p>
-                </div>
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Latest on Investment Ideas</h1>
+        <p>Join us as we explore a wide range of topics, from understanding basic financial concepts to mastering
+            advanced investment techniques. </p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+<main role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Ten top things about finance</h2>
+                <img src="{% static 'img/about/finance.png' %}" alt="..." class="img-thumbnail">
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+                    mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
+                    mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Stock Market Basics</h2>
+                <img src="{% static 'img/about/investment.jpg' %}" alt="..." class="img-thumbnail">
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+                    mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
+                    mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Real Estate vs Stocks</h2>
+                <img src="{% static 'img/about/networking.png' %}" alt="..." class="img-thumbnail">
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
+                    porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+                    ut fermentum massa justo sit amet risus.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+
+            <div class="col-md-4">
+                <h2>Financial Management Fundamentals</h2>
+                <img src="{% static 'img/about/networking.png' %}" alt="..." class="img-thumbnail">
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
+                    porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+                    ut fermentum massa justo sit amet risus.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
             </div>
         </div>
-    </div>
-</div><br>
-{% endfor %}
-{% endblock %}
+
+        <hr>
+
+    </div> <!-- /container -->
+
+</main>
+
+
+{%endblock %}

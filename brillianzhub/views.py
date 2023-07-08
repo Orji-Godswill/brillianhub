@@ -51,3 +51,7 @@ def contact_view(request):
 
 def success(request):
     return HttpResponse('Success! Thank you for your message.')
+
+
+def about_view(request):
+    return render(request, 'base/about.html')

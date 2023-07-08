@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Who are we ?</h1>
+        <p>We are poised to delivering high-quality financial analysis, stock market analysis,
+            and investment ideas to help you navigate the intricacies of the financial world </p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    </div>
+</div>
+<main role="main">
+
+
+
+
+
+    <div class="container marketing">
+        <!-- START THE FEATURETTES -->
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="#">Financial Analysis</h2>
+                <p class="lead">Our team of experienced financial analysts diligently examines various aspects of the
+                    market, including economic trends, industry performance, and company fundamentals. We employ
+                    advanced techniques and tools to analyze financial data, identify patterns, and uncover hidden
+                    opportunities. Whether you're an individual investor, a business owner, or a financial professional,
+                    our financial analysis services offer deep insights and actionable recommendations to navigate the
+                    complex world of finance.</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/finance.png' %}"
+                    alt="Generic placeholder image">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="#">Stock Market Analysis</h2>
+                <p class="lead">Stay ahead of the curve with our comprehensive stock market analysis. Our analysts
+                    closely monitor the global markets, track market movements, and identify potential investment
+                    opportunities. We provide in-depth research on individual stocks, sectors, and market trends to help
+                    you make well-informed decisions. Whether you're a seasoned investor or just starting out, our stock
+                    market analysis will equip you with the knowledge and insights necessary to thrive in today's
+                    dynamic market environment.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/stocks.jpg' %}"
+                    alt="Generic placeholder image">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="#">Investment Ideas Blogging</h2>
+                <p class="lead">Looking for fresh investment ideas and perspectives? Our engaging and informative
+                    investment ideas blog is the perfect resource for you. Our team of experts regularly publishes
+                    articles, opinion pieces, and market insights covering a wide range of investment topics. From value
+                    investing to growth strategies, from dividend stocks to cryptocurrency trends, our blog caters to
+                    investors of all backgrounds and interests. Explore our blog to discover new investment
+                    opportunities, learn valuable strategies, and gain a deeper understanding of the ever-evolving
+                    financial landscape.</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/investment.jpg' %}"
+                    alt="Generic placeholder image">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="#">Educational Resources</h2>
+                <p class="lead">We believe in empowering individuals with knowledge and expertise. In addition to our
+                    analysis and blog content, we offer a rich collection of educational resources to help you expand
+                    your financial acumen. From beginner's guides to advanced tutorials, we cover topics such as
+                    investment fundamentals, risk management, portfolio diversification, and more. Our aim is to provide
+                    you with the tools and resources necessary to enhance your financial literacy and make informed
+                    investment decisions.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/education.jpg' %}"
+                    alt="Generic placeholder image">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="#">Community & Support</h2>
+                <p class="lead">
+                    Join our vibrant community of like-minded individuals who share a passion for finance and investing.
+                    Engage in discussions, share insights, and learn from fellow investors through our interactive
+                    forums and
+                    social media channels. Additionally, our dedicated support team is always ready to assist you with
+                    any inquiries, providing
+                    prompt and personalized assistance to ensure your experience on our website is seamless and
+                    enjoyable.</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/networking.png' %}"
+                    alt="Generic placeholder image">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container -->
+
+</main>
+{% endblock %}

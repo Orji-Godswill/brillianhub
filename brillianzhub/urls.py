@@ -18,9 +18,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('financial-investment/', include("blog.urls")),
+    path('financial-calculator/', include("analyser.urls")),
+
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('contact/', views.contact_view, name="contact"),
+    path('about/', views.about_view, name="about"),
 
 ]
 

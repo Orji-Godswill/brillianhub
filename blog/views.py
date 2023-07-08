@@ -25,4 +25,3 @@ def blog_posts_view(request, tag_slug=None):
 
 def blog_post_detail_view(request, slug):
     pass
-
