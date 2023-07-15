@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Blog
 from django.urls import reverse_lazy
 from taggit.models import Tag
@@ -23,5 +23,14 @@ def blog_posts_view(request, tag_slug=None):
     return render(request, 'blog/posts.html', {'tag': tag, 'post': post})
     
 
-def blog_post_detail_view(request, slug):
-    pass
+def blog_post_detail_view(request, *args, **kwargs):
+    slug = kwargs.get('slug')
+    pk = kwargs.get('pk')
+    post = get_object_or_404(Blog, slug=slug)
+
+    context = {
+        'post': post,
+    }
+
+    return render(request, 'blog/details.html', context)
+

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+{% block content %}
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="row" style="padding-top:30px;">
+            <div class="col-lg-12 login-style">
+                <h3>Sign into your account</h3><br>
+                {% if form.errors %}
+                <p>Your username and password didn't match. Please try again</p>
+                {% endif %}
+
+                <form method='POST' action="{% url 'accounts:login' %}">{% csrf_token %}
+
+                    {{ form.non_field_errors }}
+                    <br>
+                    <div class="row">
+                        <div class="col-12" style="padding-bottom: 20px;">
+                            <div class="#">
+                                {{ form.email.errors }}
+                                <label for="{{ form.email.id_for_label }}">Email:</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="col-sm-12" style="padding-bottom: 20px;">
+                            <div class="#">
+                                {{ form.password.errors }}
+                                <label for="{{ form.password.id_for_label }}">Password:</label>
+                                {{ form.password }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><button type="submit" class="btn btn-primary">Sign in</button>
+                    <div><br>
+                        <a href="{% url 'password_reset' %}" class="forgot-password mt-4">
+                            Forgot password ?
+                        </a>
+                        <br><br>
+                        Don't have account ?
+                        <a href="{% url 'accounts:register' %}" class="dont-account">
+                            Create one
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+    {% endblock %}

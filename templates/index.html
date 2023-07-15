@@ -5,14 +5,19 @@
 {% include 'base/navbar.html' %}
 {% endblock %}
 
-{% block header %}
-{% include 'base/header.html' %}
-{% endblock %}
+
 
 {% block content %}
 
 <!-- Responsive navbar-->
-
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">Latest on Investment Ideas</h1>
+        <p>Join us as we explore a wide range of topics, from understanding basic financial concepts to mastering
+            advanced investment techniques. </p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    </div>
+</div>
 
 <!-- Page Content-->
 <section class="pt-4">
@@ -84,10 +89,7 @@
     </div>
 </section>
 
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="js/scripts.js"></script>
+
 
 
 {% endblock %}
