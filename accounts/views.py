@@ -15,18 +15,21 @@ from django.utils.safestring import mark_safe
 from .signals import user_logged_in
 from django.utils.http import is_safe_url
 from brillianzhub.mixins import NextUrlMixin, RequestFormAttachMixin
+from referral.models import Referrer, Earn
 
 # Create your views here.
+
+
 @login_required
 def account_home_view():
     return render(requests, "accounts/home.html", {})
+
 
 class AccountHomeView(LoginRequiredMixin, DetailView):
     template_name = 'users/home.html'
 
     def get_object(self):
         return self.request.user
-
 
 
 class AccountEmailActivationView(FormMixin, View):
@@ -42,7 +45,8 @@ class AccountEmailActivationView(FormMixin, View):
             if confirm_qs.count() == 1:
                 obj = confirm_qs.first()
                 obj.activate()
-                messages.success(request, "Your email has been confirmed. Please login.")
+                messages.success(
+                    request, "Your email has been confirmed. Please login.")
                 return redirect("accounts:login")
             else:
                 activated_qs = qs.filter(activated=True)
@@ -55,14 +59,12 @@ class AccountEmailActivationView(FormMixin, View):
         context = {'form': self.get_form(), 'key': key}
         return render(request, 'registration/activation-error.html', context)
 
-
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
 
     def form_valid(self, form):
         msg = """Activation link sent, please check your email and activate your account."""
@@ -76,10 +78,9 @@ class AccountEmailActivationView(FormMixin, View):
 
         return super(AccountEmailActivationView, self).form_valid(form)
 
-
     def form_invalid(self, form):
-         context = {'form': form, 'key': self.key}
-         return render(self.request, 'registration/activation-error.html', context)
+        context = {'form': form, 'key': self.key}
+        return render(self.request, 'registration/activation-error.html', context)
 
 
 class LoginView(NextUrlMixin,  RequestFormAttachMixin, FormView):
@@ -94,6 +95,8 @@ class LoginView(NextUrlMixin,  RequestFormAttachMixin, FormView):
 
 
 User = get_user_model()
+
+
 def register_page(request):
     if request.method == 'POST':
         user_form = RegistrationForm(request.POST)
@@ -106,22 +109,50 @@ def register_page(request):
             # Save the User object
             new_user.save()
             profile = Profile.objects.create(user=new_user)
+            earn = Earn.objects.create(referrer=new_user)
             return render(request,
-                    'users/register_done.html',
-                    {'new_user': new_user})
+                          'users/register_done.html',
+                          {'new_user': new_user})
     else:
         user_form = RegistrationForm()
-    return render(request,'users/register.html',{'user_form': user_form})
+    return render(request, 'users/register.html', {'user_form': user_form})
 
 
+User = get_user_model()
+
+
+def register_referrer_view(request, ref_code=None, *args, **kwargs):
+    user = User.objects.get(id_referrer__iexact=ref_code)
+
+    if request.method == 'POST':
+        user_form = RegistrationForm(request.POST)
+
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+
+            new_user.set_password(user_form.cleaned_data['password'])
+
+            new_user.save()
+
+            profile = Profile.object.create(user=new_user)
+            referral = Referrer.object.create(referrer=user, referred=new_user)
+            earn = Earn.objects.create(referrer=new_user)
+
+            return render(request, 'users/register_done.html', {'new_user': new_user})
+
+        else:
+            user_form = RegistrationForm()
+        return render(request, 'users/register.html', {'user_form', user_form})
 
 # @login_required
+
+
 def edit(request):
     if request.method == 'POST':
-        user_form = UserEditForm(instance=request.user,data=request.POST)
+        user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile,
-                       data=request.POST,
-                       files=request.FILES)
+                                       data=request.POST,
+                                       files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -134,9 +165,7 @@ def edit(request):
     return render(request,
                   'users/edit.html',
                   {'user_form': user_form,
-                  'profile_form': profile_form})
-
-
+                   'profile_form': profile_form})
 
 
 def contact(request):

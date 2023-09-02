@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
 {% block content %}
 
 <style>
@@ -16,10 +14,30 @@
         margin-top: 10px;
 
     }
+
+    .intro-section {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #5B9279;
+        padding: 5em 3em;
+        color: #EAE6E5;
+    }
+
+    h1 {
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 25px;
+    }
 </style>
 
-<!-- {% include 'snippets/header.html' %} -->
+<section class="intro-section">
+    <h1>Section For Portfolio</h1>
+    <p>Portfolio can be managed from here!</p>
+</section>
 
+{% include 'snippets/header.html' %}
 <!-- bradcam_area  -->
 <div class="bradcam_area bradcam_bg_1">
     <div class="container">
@@ -35,7 +53,76 @@
 <!--/ bradcam_area  -->
 
 <!-- ================ contact section start ================= -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="contact-title">{{ user.profile.firstname }}, {{ user.profile.lastname }}</h2>
+            </div>
+            <div class="col-lg-8">
 
+                <div class="row" style="padding-top:20px;">
+                    <div class="col-12 col-md-4 my-4">
+                        <div class="card">
+                            <h4 class="card-title">Support</h4>
+                            <div class="list-group">
+                                <a class="list-group-item" href="{% url 'about' %}">About</a>
+                                <a class="list-group-item" href="{% url 'contact' %}">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4 my-4">
+                        <div class="card">
+                            <h4 class="card-title">Account Detalis</h4>
+                            <div class="list-group">
+                                <a class="list-group-item" href="{% url 'password_change' %}">Change Password</a>
+                                <a class="list-group-item" href="{% url 'account:edit_profile' %}">Edit Profile</a>
+                                <a class="list-group-item" href="{% url 'referral:referral_view' %}">My Reffarals</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4 my-4">
+                        <div class="card">
+                            <h4 class="card-title">Transactions</h4>
+                            <div class="list-group">
+                                <a class="list-group-item" href="{% url 'order:investment' %}">Investment Portfolio</a>
+                                <a class="list-group-item" href="#">Investment Earning and Payment</a>
+                                <a class="list-group-item" href="#">Referral Earnings</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-3 offset-lg-1">
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-home"></i></span>
+                    <div class="media-body">
+                        <h3>Head Office</h3>
+                        <p>Owerri, Nigeria.</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                    <div class="media-body">
+                        <h3>Official Working Days</h3>
+                        <p>Mon to Fri 9am to 4pm</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-email"></i></span>
+                    <div class="media-body">
+                        <h3>+2348060473170</h3>
+                        <p>Send us whatsapp message anytime!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- ================ contact section end ================= -->
 
 

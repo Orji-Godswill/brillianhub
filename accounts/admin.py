@@ -15,7 +15,7 @@ class UserAdmin(BaseUserAdmin):
     form = UserAdminChangeForm
     add_form = UserAdminCreationForm
 
-    list_display = ('email', 'admin')
+    list_display = ('email', 'admin', 'id_referrer')
     list_filter = ('admin',  'staff')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -27,7 +27,7 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'password1', 'password2')}
-        ),
+         ),
     )
     search_fields = ('email', 'firstname')
     ordering = ('email',)
@@ -36,9 +36,9 @@ class UserAdmin(BaseUserAdmin):
 # class GroupExtendAdmin(admin.ModelAdmin):
 #     # list_display = ['user', 'date_of_birth', 'photo']
 
+
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'photo']
-
 
 
 admin.site.register(User, UserAdmin)
@@ -54,7 +54,9 @@ admin.site.register(Contact)
 
 class EmailActivationAdmin(admin.ModelAdmin):
     search_fields = ['email']
+
     class Meta:
         model = EmailActivation
+
 
 admin.site.register(EmailActivation, EmailActivationAdmin)

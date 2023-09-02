@@ -17,9 +17,12 @@ urlpatterns = [
     path('settings/', RedirectView.as_view(url='/account')),
     path('admin/', admin.site.urls),
 
-    path('financial-investment/', include("blog.urls")),
+    # path('investment-packages/', include("package.urls")),
     path('financial-calculator/', include("analyser.urls")),
-
+    path('blog-investments/', include("blog.urls")),
+    path('investment-packages/', include('package.urls')),
+    path('referrals/', include('referral.urls')),
+    path('portfolio/', include('order.urls')),
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('contact/', views.contact_view, name="contact"),

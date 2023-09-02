@@ -7,4 +7,54 @@
 
 {% block content %}
 
+<main onclick="newStyle();">
+    <h1 id="intro">Analyser.com</h1>
+</main>
+
+<script>
+
+    function blooming() {
+        var image = document.getElementById('myImage');
+        if (image.src.match("normal")) {
+            image.src = "flower.png";
+        } else {
+            image.src = "normal.png";
+        }
+    }
+
+    function newStyle() {
+        let newColor = '';
+        let newFont = '';
+        let x = Math.floor(Math.random() * 5);
+
+        switch (x) {
+            case 0:
+                newColor = 'red';
+                newFont = 'Times New Roman';
+                break;
+            case 1:
+                newColor = 'blue';
+                newFont = 'Verdana';
+                break;
+            case 2:
+                newColor = 'yellow';
+                newFont = 'Georgia';
+                break;
+            case 3:
+                newColor = 'purple';
+                newFont = 'Palatino';
+                break;
+            case 4:
+                newColor = 'lime';
+                newFont = 'Impact';
+                break;
+        }
+
+        var elem = document.getElementById('intro');
+        elem.style.color = newColor;
+        elem.style.fontFamily = newFont;
+    }
+
+</script>
+
 {% endblock %}
