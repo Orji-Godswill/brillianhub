@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+{% block content %}
+
+<style>
+    .table-responsive {
+        display: table;
+    }
+</style>
+
+{% include 'snippets/header.html' %}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3>Success Message</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<div class="about_mission">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-xl-12 col-md-12">
+                <div class="about_text table-responsive">
+                    <h5>Team Zeeplax gladly acknowledge reciept of your request for payment! We shall respond
+                        immediately. Thank You</h5><br>
+                    <p><a href="{% url 'referral:my_referrals' %}">Click to go back</a></p>
+                    <p>My referral link
+                        <a href="http://127.0.0.1:8000/account/register/{{ user.id_referrer }}/" target="_blank">
+                            "https://zeeplax.com/account/register/{{ user.id_referrer }}/"
+                        </a>
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

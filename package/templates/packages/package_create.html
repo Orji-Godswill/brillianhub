@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/navbar.html' %}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3>Post a Property for Sale</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<section class="contact-section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <h2 class="contact-title">Post Property Form</h2>
+                <h3>Ensure the documents are properly edited before you submit</h3>
+                <p style="color: red">Click <a href="#">here</a> to add land properties</p>
+            </div>
+            <br>
+            <div class="col-lg-8">
+                <form enctype="multipart/form-data" novalidate="novalidate" method='POST' action="">{% csrf_token %}
+                    {{ package_form.as_p }}
+                    <br><button type="submit" class="btn btn-primary">Submit Package</button>
+                </form>
+
+                <center>
+                    <p><a href="#">Go back</a><br></p>
+                </center>
+
+            </div>
+
+            <div class="col-lg-3 offset-lg-1">
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-home"></i></span>
+                    <div class="media-body">
+                        <h3>Head Office</h3>
+                        <p>Owerri, Nigeria.</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                    <div class="media-body">
+                        <h3>Official Working Days</h3>
+                        <p>Mon to Fri 9am to 4pm</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-email"></i></span>
+                    <div class="media-body">
+                        <h3>+2348060473170</h3>
+                        <p>Send us whatsapp message anytime!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+{% endblock %}

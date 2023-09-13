@@ -11,7 +11,7 @@ def investment_list_view(requests):
         'investment': investment,
     }
 
-    return render(requests, 'investment/invest_list.html', context)
+    return render(requests, 'investment/invest_lists.html', context)
 
 
 def invest_now_view(requests, *args, **kwargs):

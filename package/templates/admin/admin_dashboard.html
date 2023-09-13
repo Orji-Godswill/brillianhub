@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'snippets/header.html' %}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3>Property Homepage</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+
+
+
+<div class="container">
+    <div class="row" style="padding-top: 50px;">
+        <div class="col-lg-10">
+            <h3><b>POST YOUR PROPERTIES HERE</b></h3>
+            <br>
+            <div id="intro-graduate">
+                <p class="brief">Manage your properties <a href="#">here</a></p>
+            </div><br>
+            <div id="graduate_post">
+                <div>
+                    <hr>
+                    <table style="width:100%">
+                        <tr>
+                            <th>Title</th>
+                            <th>Created</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr>
+                            {% for package in package %}
+                            <td>
+                                <p>{{ package.title }}</p>
+                            </td>
+                            <td>
+                                <p>{{ package.created }}</p>
+                            </td>
+                            <td>
+                                <p>{{ package.status }}</p>
+                            </td>
+                            <td>
+                                <p><a href="#">update</a></p>
+                            </td>
+                            <td>
+                                <p><a href="#">delete</a></p>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <p class="p-create">You haven't created any message yet</p>
+                        {% endfor %}
+                    </table><br>
+                    <p class="p-create"><a href="{% url 'package:package_create' %}">Post new property</a></p><br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<center><a href="#">Go back</center>
+
+{% endblock content %}

@@ -1,19 +1,22 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Package
 from order.models import Order
 from order.forms import OrderForm
+from dividend.forms import DividendForm
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from .forms import CreatePackageForm
+from dividend.models import Dividend
 
 
-def packages_view(requests):
+def packages_view(request):
     packages = Package.objects.filter(status='published')
     context = {
         'packages': packages,
     }
 
-    return render(requests, 'packages/packages.html', context)
+    return render(request, 'packages/packages.html', context)
 
 
 User = get_user_model()
@@ -42,3 +45,20 @@ def package_detail_view(request, *args, **kwargs):
     }
 
     return render(request, 'packages/package_detail.html', context)
+
+
+def package_create_view(request):
+    package_form = CreatePackageForm(request.POST)
+
+    if request.method == 'POST':
+        if package_form.is_valid():
+            dividend = Dividend.objects.create(package=new_package, amount=0)
+            print(dividend)
+            new_package = package_form.save(commit=False)
+            new_package.save()
+            return render(request,
+                          'packages/package_create_done.html',
+                          {'new_package': new_package})
+        else:
+            package_form = CreatePackageForm(initial={'user': request.user.id})
+    return render(request, 'packages/package_create.html', {'package_form': package_form})

@@ -17,8 +17,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 
 
-class PackageQuerySet(models.query.QuerySet):
-
+class AssetQuerySet(models.query.QuerySet):
     def featured(self):
         return self.queryset().filter(featured=True)
 
@@ -33,13 +32,12 @@ class PackageQuerySet(models.query.QuerySet):
             Q(category__icontains=query) |
             Q(cost__icontains=query)
         )
-
         return self.filter(lookups).distinct()
 
 
-class PackageManager(models.Manager):
+class AssetManager(models.Manager):
     def get_queryset(self):
-        return PackageQuerySet(self.model, using=self._db)
+        return AssetQuerySet(self.model, using=self._db)
 
     def featured(self):
         return self.get_queryset().filter(featured=True)
@@ -74,9 +72,11 @@ class Package(models.Model):
     STATUS_CHOICES = (
         ('closed', 'Closed'),
         ('open', 'Open'),
-        ('draft', 'Draft'),
-        ('published', 'Published'),
+    )
 
+    LISTED_CHOICE = (
+        ('L', 'Listed'),
+        ('Del', 'Delisted')
     )
 
     CATEGORY_CHOICES = (
@@ -98,17 +98,88 @@ class Package(models.Model):
     area = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(max_length=250)
     package_key = models.CharField(max_length=30, blank=True, null=True)
-    publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     featured = models.BooleanField(default=False)
+    listed = models.CharField(
+        max_length=3, choices=LISTED_CHOICE, default='Del')
     category = models.CharField(
-        max_length=20, choices=CATEGORY_CHOICES, default='duplex')
+        max_length=20, choices=CATEGORY_CHOICES, default='land')
     status = models.CharField(
-        max_length=10, choices=STATUS_CHOICES, default='draft')
+        max_length=10, choices=STATUS_CHOICES, default='open')
+    publish = models.DateTimeField(default=timezone.now)
 
-    objects = PackageManager()
+    objects = AssetManager()
     tags = TaggableManager()
-    search = PackageManager()
+    search = AssetManager()
+
+    class Meta:
+        ordering = ('-publish',)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('package:package_detail', kwargs={'slug': self.slug})
+
+
+def pre_save_create_package_key(sender, instance, *args, **kwargs):
+    if not instance.package_key:
+        instance.package_key = unique_package_key_generator(instance)
+
+
+pre_save.connect(pre_save_create_package_key, sender=Package)
+
+
+def post_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(post_pre_save_receiver, sender=Package)
+
+
+class Property(models.Model):
+    STATUS_CHOICES = (
+        ('closed', 'Closed'),
+        ('open', 'Open'),
+    )
+
+    LISTED_CHOICE = (
+        ('L', 'Listed'),
+        ('Del', 'Delisted')
+    )
+
+    CATEGORY_CHOICES = (
+        ('apartment', 'APARTMENT'),
+        ('duplex', 'Duplex'),
+        ('hostel', 'Hostel'),
+        ('land', 'Land'),
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name='property_users', on_delete=models.CASCADE)
+    title = models.CharField(max_length=250)
+    slug = models.SlugField(blank=True, unique=True)
+    image = models.FileField(
+        upload_to=upload_image_path, null=True, blank=True)
+    cost = models.DecimalField(max_digits=15, decimal_places=2)
+    description = RichTextUploadingField()
+    area = models.DecimalField(max_digits=10, decimal_places=2)
+    location = models.CharField(max_length=250)
+    property_key = models.CharField(max_length=30, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    featured = models.BooleanField(default=False)
+    listed = models.CharField(
+        max_length=3, choices=LISTED_CHOICE, default='Del')
+    category = models.CharField(
+        max_length=20, choices=CATEGORY_CHOICES, default='land')
+    status = models.CharField(
+        max_length=10, choices=STATUS_CHOICES, default='open')
+    publish = models.DateTimeField(default=timezone.now)
+
+    objects = AssetManager()
+    tags = TaggableManager()
+    search = AssetManager()
 
     class Meta:
         ordering = ('-publish',)

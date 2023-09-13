@@ -21,8 +21,8 @@ from referral.models import Referrer, Earn
 
 
 @login_required
-def account_home_view():
-    return render(requests, "accounts/home.html", {})
+def account_home_view(request):
+    return render(request, "accounts/home.html", {})
 
 
 class AccountHomeView(LoginRequiredMixin, DetailView):
@@ -57,7 +57,7 @@ class AccountEmailActivationView(FormMixin, View):
                     messages.success(request, mark_safe(msg))
                     return redirect("accounts:login")
         context = {'form': self.get_form(), 'key': key}
-        return render(request, 'registration/activation-error.html', context)
+        return render(request, 'registration/activation_error.html', context)
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
@@ -80,7 +80,7 @@ class AccountEmailActivationView(FormMixin, View):
 
     def form_invalid(self, form):
         context = {'form': form, 'key': self.key}
-        return render(self.request, 'registration/activation-error.html', context)
+        return render(self.request, 'registration/activation_error.html', context)
 
 
 class LoginView(NextUrlMixin,  RequestFormAttachMixin, FormView):

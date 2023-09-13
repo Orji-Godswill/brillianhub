@@ -22,7 +22,9 @@ urlpatterns = [
     path('blog-investments/', include("blog.urls")),
     path('investment-packages/', include('package.urls')),
     path('referrals/', include('referral.urls')),
-    path('portfolio/', include('order.urls')),
+    path('order/', include('order.urls')),
+    path('portfolio/', include('portfolio.urls')),
+    path('dividend/', include('dividend.urls')),
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('contact/', views.contact_view, name="contact"),

@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'django.contrib.humanize',
 
+    'mathfilters',
+
     'analyser',
     'storages',
     'taggit',
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'order',
     'portfolio',
     'package',
+    'dividend',
 ]
 
 

@@ -38,7 +38,9 @@
                         {% for obj in investment %}
                         <tbody>
                             <tr>
-                                <td>{{ obj.package }}</td>
+                                <td><a href="{% url 'dividend:income_list' slug=obj.package.slug %}">{{obj.package}}</a>
+                                </td>
+
                                 <td>{{ obj.amount }}</td>
                                 <td>2300Euro</td>
                                 <td>5% <span id="profit_direction">up</span></td>

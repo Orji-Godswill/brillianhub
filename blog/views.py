@@ -25,7 +25,6 @@ def blog_posts_view(request, tag_slug=None):
 
 def blog_post_detail_view(request, *args, **kwargs):
     slug = kwargs.get('slug')
-    pk = kwargs.get('pk')
     post = get_object_or_404(Blog, slug=slug)
 
     context = {
