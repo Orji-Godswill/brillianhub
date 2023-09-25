@@ -18,7 +18,7 @@ urlpatterns = [
             views.AccountEmailActivationView.as_view(), name='resend-activation'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page=settings.LOGOUT_URL), name='logout'),
-    path('register/', views.register_page, name='register'),
+    path('ze/register/', views.register_page, name='register'),
     re_path(r'^ze/register?ref=(?P<ref_code>[0-9A-Za-z]+)/$',
             views.register_referrer_view, name='register_referred'),
     path('edit/', views.edit, name='edit_profile'),

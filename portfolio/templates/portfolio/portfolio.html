@@ -49,7 +49,8 @@
                         </tbody>
                         {% endfor %}
                         {% else %}
-                        <p>You have no property bought from Brillianzhub properties. <a href="#">Click here to buy
+                        <p>You have no property bought from Brillianzhub properties. <a
+                                href="{% url 'package:packages' %}">Click here to buy
                                 properties</a></p>
                     </table>
                     {% endif %}
@@ -85,6 +86,9 @@
                         </tbody>
                         {% endfor %}
                     </table>
+                    <p><a href="{% url 'package:packages' %}">click here to buy more
+                            properties</a>
+                    </p>
                     {% else %}
                     <p>You have no property bought from Brillianzhub properties. <a href="#">click here to buy
                             properties</a></p>
@@ -119,8 +123,7 @@
                         {% endfor %}
                     </table>
                     {% else %}
-                    <p>You have no property bought from Brillianzhub properties <a href="#">Click here to add properties
-                            from other vendors</a></p>
+                    <p>You have no property bought from other vendors <a href="#">Click here to add</a></p>
                     {% endif %}
                     <p>My referral link
                         <a href="http://127.0.0.1:8000/account/register/{{ user.id_referrer }}/" target="_blank">
@@ -130,7 +133,7 @@
                 </div>
                 <div class="about_text">
                     <a href="#">
-                        <h5>View your earnings</h5>
+                        <h5></h5>
                     </a><br>
 
                 </div>

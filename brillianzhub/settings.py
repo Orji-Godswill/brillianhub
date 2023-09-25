@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'portfolio',
     'package',
     'dividend',
+    'course',
 ]
 
 

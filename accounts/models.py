@@ -2,6 +2,7 @@ from datetime import timedelta
 from django.db import models
 from django.urls import reverse
 from django import forms
+import random
 from django.db.models import Q
 from django.conf import settings
 from django.utils import timezone
@@ -41,6 +42,7 @@ class UserManager(BaseUserManager):
         user_obj.staff = is_staff
         user_obj.admin = is_admin
         user_obj.is_active = is_active
+        user_obj.is_instructor = is_instructor
         user_obj.save(using=self._db)
         return user_obj
 
@@ -62,10 +64,21 @@ class UserManager(BaseUserManager):
         )
         return user
 
+    def create_instructor(self, email, password=None):
+        user = self.create_user(
+            email=email,
+            password=password,
+            is_instructor=True
+        )
+
+        return user
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True)
+    instructor = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -92,7 +105,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_staff(self):
+        return self.staff
+
+    @property
+    def is_admin(self):
         return self.admin
+
+    @property
+    def is_instructor(self):
+        return self.instructor
 
 
 def pre_save_create_id_referrer(sender, instance, *args, **kwargs):
@@ -108,6 +129,7 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=250)
     lastname = models.CharField(max_length=250)
+    date_of_birth = models.DateField(blank=True, null=True)
     country = models.CharField(max_length=250)
     contact = models.CharField(max_length=20)
     photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)

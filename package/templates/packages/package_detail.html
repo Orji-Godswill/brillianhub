@@ -66,82 +66,43 @@
                         </tbody>
                     </table>
 
-                    {% if not user.request.is_authenticated %}
-                    <a href="{% url 'account:login' %}"><button type="button" class="btn btn-secondary">Invest
-                            Now</button></a>
-                    {% else %}
-                    <a href="{% url 'order:invest_now' %}"><button type="button" class="btn btn-secondary">Invest
-                            Now</button></a>
-                    {% endif %}
-
-                    
                     <form class="form-contact contact_form" action="" method="POST"> {% csrf_token %}
                         {{ order_form.non_field_errors }}
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    {{ form.fullname.errors }}
-                                    <label for="{{ form.fullname.id_for_label }}">Fullname:</label>
-                                    {{ form.fullname }}
+                                    {{ order_form.title.errors }}
+                                    <label for="{{ order_form.title.id_for_label }}">Slot:</label>
+                                    {{ order_form.slot }}
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    {{ form.title.errors }}
-                                    <label for="{{ form.title.id_for_label }}">Title:</label>
-                                    {{ form.title }}
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    {{ form.location.errors }}
-                                    <label for="{{ form.location.id_for_label }}">Location:</label>
-                                    {{ form.location }}
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="form-group">
-                                    {{ form.contact.errors }}
-                                    <label for="{{ form.contact.id_for_label }}">Mobile:</label>
-                                    {{ form.contact }}
+                                    {{ order_form.title.errors }}
+                                    <label for="{{ order_form.title.id_for_label }}">Payment Option:</label>
+                                    {{ order_form.payment_option }}
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <div class="form-group">
-                                    {{ form.description.errors }}
-                                    <label for="{{ form.description.id_for_label }}">Description:</label>
-                                    {{ form.description }}
-                                </div>
-                            </div>
-                            <div class="col-sm-12" title="This is my tooltip">
-                                <div class="form-group">
-                                    {{ form.type.errors }}
-                                    <label for="{{ form.type.id_for_label }}" title="My cat sat on a table">Select
-                                        Type:</label>
-                                    {{ form.type }}
-                                </div><br>
-
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    {{ form.user.errors }}
-                                    <label for="{{ form.user.id_for_label }}"></label>
-                                    {{ form.user }}
-                                </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                {{ form.user.errors }}
+                                <label for="{{ form.user.id_for_label }}"></label>
+                                {{ form.user }}
                             </div>
                         </div>
-
-                        <div class="form-group mt-3">
-                            <button type="submit" name="button"
-                                class="button button-contactForm boxed-btn">Send</button>
-                        </div>
-                    </form>
-
-
                 </div>
+
+                <div class="form-group mt-3">
+                    <button type="submit" name="button" class="button button-contactForm boxed-btn">Send</button>
+                </div>
+                </form>
+
+
             </div>
         </div>
+    </div>
     </div>
 
 </main>

@@ -8,10 +8,11 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from .forms import CreatePackageForm
 from dividend.models import Dividend
+from referral.models import Referrer
 
 
 def packages_view(request):
-    packages = Package.objects.filter(status='published')
+    packages = Package.objects.filter(status='open')
     context = {
         'packages': packages,
     }
@@ -27,17 +28,31 @@ def package_detail_view(request, *args, **kwargs):
     package = get_object_or_404(Package, slug=slug)
     order_form = OrderForm(data=request.POST)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         if order_form.is_valid():
-            package_order = order_form.save(commit=False)
-            package_order.user = request.user
-            package_order.package = package
-            package_order.save()
+            try:
+                ref = Referrer.objects.get(referred=request.user)
+                print(ref)
+                ref_user = User.objects.get(email__iexact=ref)
+                print(ref_user)
+                order_obj, new_order_obj = Order.objects.get_or_create(
+                    package=package, user=request.user, referrer=ref_user)
+
+                if order_obj.exists():
+                    print('You have made this order before')
+
+                print(order_obj, new_order_obj)
+            except:
+                order_obj, new_order_obj = Order.objects.get_or_create(
+                    package=package, user=request.user)
+
+                if new_order_obj == True:
+                    print('You have made this order before')
             messages.success(
                 request, "Order received with thanks. We would get across to you on the patment procedure after confirmation")
             return HttpResponseRedirect(package.get_absolute_url())
     else:
-        package_order = OrderForm(initial={'user': request.user.id})
+        order_form = OrderForm(initial={'user': request.user.id})
 
     context = {
         'package': package,
@@ -53,7 +68,6 @@ def package_create_view(request):
     if request.method == 'POST':
         if package_form.is_valid():
             dividend = Dividend.objects.create(package=new_package, amount=0)
-            print(dividend)
             new_package = package_form.save(commit=False)
             new_package.save()
             return render(request,

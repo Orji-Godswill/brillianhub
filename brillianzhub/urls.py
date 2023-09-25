@@ -25,6 +25,8 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('portfolio/', include('portfolio.urls')),
     path('dividend/', include('dividend.urls')),
+    path('courses/', include("course.urls")),
+
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('contact/', views.contact_view, name="contact"),
