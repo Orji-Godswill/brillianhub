@@ -33,12 +33,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog.apps.BlogConfig',
     'django.contrib.humanize',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     'mathfilters',
+    'robots',
+    'crispy_forms',
+    'crispy_bootstrap4',
 
     'analyser',
+    'blog',
     'storages',
     'taggit',
     'ckeditor',
@@ -48,6 +53,7 @@ INSTALLED_APPS = [
     'package',
     'dividend',
     'course',
+    'students',
 ]
 
 
@@ -232,3 +238,6 @@ CSRF_COOKIE_SECURE = False
 SECURE_HSTS_SECONDS = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_FRAME_DENY = False
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

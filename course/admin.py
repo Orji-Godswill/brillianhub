@@ -1,12 +1,37 @@
 from django.contrib import admin
-from .models import Course, Category, Module, Objective
-# Register your models here.
+from .models import Course, Module, Topic, Content
 
 
-admin.site.register(Course)
+class ModuleInline(admin.TabularInline):
+    model = Module
+    extra = 1  # Number of empty forms to display
 
-admin.site.register(Category)
 
-admin.site.register(Module)
+class TopicInline(admin.TabularInline):
+    model = Topic
+    extra = 1  # Number of empty forms to display
 
-admin.site.register(Objective)
+
+class ContentInline(admin.TabularInline):
+    model = Content
+    extra = 1  # Number of empty forms to display
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    inlines = [ModuleInline, TopicInline, ContentInline]
+
+
+# @admin.register(Module)
+# class ModuleAdmin(admin.ModelAdmin):
+#     pass
+
+
+# @admin.register(Topic)
+# class TopicAdmin(admin.ModelAdmin):
+#     pass
+
+
+# @admin.register(Content)
+# class ContentAdmin(admin.ModelAdmin):
+#     pass

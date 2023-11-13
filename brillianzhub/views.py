@@ -49,6 +49,6 @@ def success(request):
 
 def about_view(request):
     context = {
-        'seo_title': 'ABOUT US',
+        'seo_title': 'brillianzhub is a training hub for investors',
     }
     return render(request, 'base/about.html', context)

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+<main role="main">
+    <h1>Enrolled Courses for {{ student }}</h1>
+
+    <ul>
+        {% for course in courses %}
+        <li><a href="{% url 'students:percentage_completion' course.id %}">{{ course.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+
+
+
+</main>
+
+
+{% endblock %}

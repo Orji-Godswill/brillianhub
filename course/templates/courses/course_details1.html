@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">
+            <h3>{{ course.category }} - {{ course.title }}</h3>
+        </h1>
+        <p>Complete your courses biko </p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+<main>
+    <div class="container description-house">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 description-holder des1">
+                <div class="container-fluid description">
+                    <h5>About this course</h5>
+                    <!-- <p>
+                        {{ object.description }}
+                    </p> -->
+
+                    <h5>COURSE DEMO VIDEO</h5>
+
+                    {% if object.video %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <video class="embed-responsive-item" controls>
+                            <source src="{{ object.video.url }}" type="video/mp4">
+                            Your broswer does not support the video tag
+                        </video>
+                    </div>
+                    {% endif %}
+
+                    <h5>Learning Objectives</h5>
+                    <p>It is expected that at the end of this course, you will be able to do the following:</p>
+                    <p>
+                    <ul class="learn">
+                        {% for objective in course.objectives.all %}
+                        <li>
+                            {{ objective.objectives }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    </p>
+                    <br>
+                    <h5>Course Modules</h5>
+                    <div class="syllabus-house" id="course-details">
+
+                        <div class="syllabus-info">
+                            {% for module in course.modules.all %}
+                            <p>
+                                {{ module.title }}
+                            </p>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+{% endblock %}

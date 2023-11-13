@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+<main role="main">
+    <!-- ... Existing code ... -->
+
+    <h1>{{ course.title }} - Course Detail</h1>
+    <p>{{ course.description }}</p>
+
+    {% if modules %}
+    <h2>Modules</h2>
+    <ul>
+        {% for module in modules %}
+        <li>
+            <strong>{{ module.title }}</strong>
+            <ul>
+                {% for topic in module.topic_set.all %}
+                <li>
+                    <a href="{% url 'course:topic_detail' pk=topic.pk %}">{{ topic.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- ... Existing code ... -->
+
+</main>
+
+{% endblock %}

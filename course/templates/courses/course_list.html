@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container">
+        {% if stock %}
+        <h1 class="display-4">Latest on Stock Courses</h1>
+        <p>Join us as we explore a wide range of topics, from understanding basic financial concepts to mastering
+            advanced investment techniques. </p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        {% else %}
+        <h1 class="display-4">Relax</h1>
+        {% endif %}
+    </div>
+</div>
+
+<main role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+
+
+            {% for course in courses %}
+
+            <div class="col-md-4">
+                <h2>{{ course.title }}</h2>
+                <p>{{obj.description }} </p>
+                <p><a class="btn btn-secondary" href="{% url 'course:course_detail' pk=course.pk %}" role="button">View
+                        details
+                        &raquo;</a></p>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <hr>
+
+    </div> <!-- /container -->
+
+</main>
+
+
+{%endblock %}

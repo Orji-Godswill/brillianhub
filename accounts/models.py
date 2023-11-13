@@ -42,7 +42,6 @@ class UserManager(BaseUserManager):
         user_obj.staff = is_staff
         user_obj.admin = is_admin
         user_obj.is_active = is_active
-        user_obj.is_instructor = is_instructor
         user_obj.save(using=self._db)
         return user_obj
 

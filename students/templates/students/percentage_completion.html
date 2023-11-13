@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+<main role="main">
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">My Courses</h1>
+            <p>Complete your courses biko </p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        </div>
+    </div>
+
+    <h1>Percentage Completion for {{ course.title }}</h1>
+
+    <p>Completion Percentage: {{ completion_percentage }}%</p>
+</main>
+{% endblock %}

@@ -1,60 +1,48 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block header %}
 {% include 'base/navbar.html' %}
 {% endblock %}
 
+{% load crispy_forms_tags %}
+
+
 {% block content %}
 
-<main onclick="newStyle();">
-    <h1 id="intro">Analyser.com</h1>
-</main>
 
-<script>
 
-    function blooming() {
-        var image = document.getElementById('myImage');
-        if (image.src.match("normal")) {
-            image.src = "flower.png";
-        } else {
-            image.src = "normal.png";
-        }
-    }
 
-    function newStyle() {
-        let newColor = '';
-        let newFont = '';
-        let x = Math.floor(Math.random() * 5);
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div id="form-container" class="card-body">
+                    <form id="calculator1_form" , method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input class="btn btn-info" type="submit" value="Calculate">
+                    </form>
 
-        switch (x) {
-            case 0:
-                newColor = 'red';
-                newFont = 'Times New Roman';
-                break;
-            case 1:
-                newColor = 'blue';
-                newFont = 'Verdana';
-                break;
-            case 2:
-                newColor = 'yellow';
-                newFont = 'Georgia';
-                break;
-            case 3:
-                newColor = 'purple';
-                newFont = 'Palatino';
-                break;
-            case 4:
-                newColor = 'lime';
-                newFont = 'Impact';
-                break;
-        }
+                    <div id="savings-container">
+                        {% if savings %}
+                        <p>Total money saved over the period: {{ savings }}</p>
+                        {% endif %}
+                    </div>
+                    <div id="profit-container">
+                        {% if profit %}
+                        <p>Return on savings: {{ profit }}</p>
+                        {% endif %}
+                    </div>
+                    <div id="result-container">
+                        {% if result %}
+                        <p>Total money earned over the period: {{ result }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        var elem = document.getElementById('intro');
-        elem.style.color = newColor;
-        elem.style.fontFamily = newFont;
-    }
-
-</script>
 
 {% endblock %}
