@@ -5,96 +5,419 @@
 {% include 'base/navbar.html' %}
 {% endblock %}
 
-{% block header %}
-{% include 'base/header.html' %}
-{% endblock %}
-
 {% block content %}
+<main class="main">
+    <!-- Hero image -->
+    <div class="container-fluid hero-div div-padding bottom-margin home-nav-bg-green c">
+        <div class="grid-container-hero-div">
+            <div class="grid-item-hero-div a">
+                <div class="container-fluid hero-div-info c">
+                    <img src="{% static 'icons/path1960.svg' %}" class="img-fluid path-img">
+                    <h2>Your Personal<br>Investment <br class="phone">Training Hub</h2>
+                    <p>Benefit from expert insights and time-tested <br class="desktop">strategies to achieve
+                        financial success and stability.</p>
 
-<!-- Responsive navbar-->
+                    <div class="container-fluid hero-button-div p-0 b">
+                        <a href="{% url 'course:course_list' %}">
+                            <button class="filled-btn-lg">Browse Hub</button>
+                        </a>
 
-<div class="jumbotron" style="background-color: #f6e6d9;">
-    <div class="container">
-        <h1 class="display-3">Who are we ?</h1>
-        <p>We are poised to delivering high-quality financial analysis, stock market analysis,
-            and investment ideas to help you navigate the intricacies of the financial world </p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+                        <a href="book-consultation.html">
+                            <button class="out-fill-btn-lg">Book Consultation</button>
+                        </a>
+
+                    </div>
+                    <img src="{% static 'icons/savings.svg' %}" class="img-fluid savings-img desktop">
+                </div>
+
+            </div>
+
+            <div class="grid-item-hero-div a hero-img">
+                <img src="{% static 'images/sky-scrapper.png' %}" class="img-fluid hero-img2">
+
+
+                <img src="{% static 'icons/savings.svg' %}" class="img-fluid savings-img phone">
+            </div>
+        </div>
     </div>
-</div>
 
+    <!-- Who are We -->
+    <div class="container-fluid who-are-we-div div-padding bottom-margin c">
+        <div class="grid-container-who-are-we">
+            <div class="grid-item-who-are-we who-are-we-pix a">
+                <img src="{% static 'images/team-meeting.png' %}" class="img-fluid team-img">
+            </div>
 
-<main role="main">
-    <!-- Page Content-->
-    <section class="pt-4">
-        <div class="container px-lg-5">
-            <!-- Page Features-->
-            <div class="row gx-lg-5">
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-collection"></i></div>
-                            <h2 class="fs-4 fw-bold">Fresh new layout</h2>
-                            <p class="mb-0">With Bootstrap 5, we've created a fresh new layout for this template!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-cloud-download"></i></div>
-                            <h2 class="fs-4 fw-bold">Free to download</h2>
-                            <p class="mb-0">As always, Start Bootstrap has a powerful collectin of free templates.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-card-heading"></i></div>
-                            <h2 class="fs-4 fw-bold">Jumbotron hero header</h2>
-                            <p class="mb-0">The heroic part of this template is the jumbotron hero header!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-bootstrap"></i></div>
-                            <h2 class="fs-4 fw-bold">Feature boxes</h2>
-                            <p class="mb-0">We've created some custom feature boxes using Bootstrap icons!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-code"></i></div>
-                            <h2 class="fs-4 fw-bold">Simple clean code</h2>
-                            <p class="mb-0">We keep our dependencies up to date and squash bugs as they come!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-patch-check"></i></div>
-                            <h2 class="fs-4 fw-bold">A name you trust</h2>
-                            <p class="mb-0">Start Bootstrap has been the leader in free Bootstrap templates since 2013!
+            <div class="grid-item-who-are-we a">
+                <div class="container-fluid who-are-we-info p-0 m-0 c">
+                    <h2>Brillianzhub<h2>
+
+                            <h6>We are...</h6>
+                            <p>
+                                Brillianzhub, a top financial coaching firm in Stuttgart. We <br
+                                    class="desktop">specialize in educating individuals on real estate and stock <br
+                                    class="desktop">investments, providing personalized coaching to help our <br
+                                    class="desktop">clients secure their financial future.
                             </p>
-                        </div>
+
+                            <p>
+                                Our dedicated team is committed to empowering you with <br class="desktop">the
+                                knowledge and tools needed for successful investments <br class="desktop">and
+                                financial well-being.
+                            </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why You Should Invest -->
+    <div class="container-fluid why-invest-div div-padding  home-nav-bg-green b">
+        <h2 class="heading">Why you should invest</h2>
+        <div class="grid-container-why-invest">
+            <div class="why-invest phone">
+                <h2>01</h2>
+                <h6 id="outside-heading">Financial Literacy</h6>
+                <div class="why-invest-detail">
+                    <h6>Financial Literacy</h6>
+                    <p>
+                        Gaining investment knowledge enhances your financial literacy and understanding of market
+                        dynamics.
+                    </p>
+                </div>
+            </div>
+
+            <div class="why-invest desktop" id="why-invest1" onclick="whyInvestC(1)" onmouseover="whyInvest(1)"
+                onmouseout="closeWhyInvest()" title="1">
+                <h2>01</h2>
+                <h6 id="outside-heading1">Financial Literacy</h6>
+                <div class="why-invest-detail" id="why-invest-detail1">
+                    <h6>Financial Literacy</h6>
+                    <p>
+                        Gaining investment knowledge enhances your financial literacy and understanding of market
+                        dynamics.
+                    </p>
+                </div>
+            </div>
+
+            <div class="why-invest" id="why-invest2" onclick="whyInvestC(2)" onmouseover="whyInvest(2)"
+                onmouseout="closeWhyInvest()" title="1">
+                <h2>02</h2>
+                <h6 id="outside-heading2">Wealth Building</h6>
+                <div class="why-invest-detail" id="why-invest-detail2">
+                    <h6>Wealth Building</h6>
+                    <p>
+                        Investing in real estate and stocks can be a powerful tool for building long-term wealth and
+                        financial stability.
+                    </p>
+                </div>
+            </div>
+
+            <div class="why-invest" id="why-invest3" onclick="whyInvestC(3)" onmouseover="whyInvest(3)"
+                onmouseout="closeWhyInvest()" title="1">
+                <h2>03</h2>
+                <h6 id="outside-heading3">Risk Management</h6>
+                <div class="why-invest-detail" id="why-invest-detail3">
+                    <h6>Risk Management</h6>
+                    <p>
+                        Learning investment strategies helps you manage risks effectively, minimizing potential
+                        financial losses.
+                    </p>
+                </div>
+            </div>
+
+            <div class="why-invest" id="why-invest4" onclick="whyInvestC(4)" onmouseover="whyInvest(4)"
+                onmouseout="closeWhyInvest()" title="1">
+                <h2>04</h2>
+                <h6 id="outside-heading4">Future Planning</h6>
+                <div class="why-invest-detail" id="why-invest-detail4">
+                    <h6>Future Planning</h6>
+                    <p>
+                        Acquiring investment knowledge aids in effective long-term financial planning and goal
+                        setting.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Browse hub -->
+    <div class="container-fluid browse-hub-div div-padding bottom-margin home-nav-bg-white">
+        <h2 class="heading">Browse hub</h2>
+        <div class="grid-container-browse-hub-div">
+            <div class="course-div a">
+                <div class="container-fluid course-img-holder p-0 m-0">
+                    <img src="{% static 'images/meeting.jpg' %}" class="img-fluid course-img">
+                </div>
+                <div class="container-fluid course-details c">
+                    <h5>Personal Financial Management</h5>
+                    <p class="course-description">
+                        Gain knowledge and practical skills in managing your finances, from budgeting & saving to
+                        debt management and long-term financial planning.
+                    </p>
+
+                    <h6 class="alignleft">
+                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
+                        5 Modules
+                    </h6>
+
+                    <h6 class="alignright">
+                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
+                        8hrs 40mins
+                    </h6>
+                    <div class="clr"></div>
+                    <p class="text-end">
+                        <a href="">
+                            <button class="out-fill-btn">
+                                Learn Here
+                                <img src="{% static 'icons/arrow_right.svg' %}">
+                            </button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="course-div a">
+                <div class="container-fluid course-img-holder p-0 m-0">
+                    <img src="{% static 'images/forex.jpg' %}" class="img-fluid course-img">
+                </div>
+                <div class="container-fluid course-details c">
+                    <h5>Stock Investment</h5>
+                    <p class="course-description">
+                        Explore the dynamics of the stock market and learn how to analyze stocks, understand market
+                        trends, & make informed investment decisions.
+                    </p>
+
+                    <h6 class="alignleft">
+                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
+                        5 Modules
+                    </h6>
+
+                    <h6 class="alignright">
+                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
+                        8hrs 40mins
+                    </h6>
+                    <div class="clr"></div>
+                    <p class="text-end">
+                        <a href="">
+                            <button class="out-fill-btn">
+                                Learn Here
+                                <img src="{% static 'icons/arrow_right.svg' %}">
+                            </button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="course-div a">
+                <div class="container-fluid course-img-holder p-0 m-0">
+                    <img src="{% static 'images/hotel.jpg' %}" class="img-fluid course-img">
+                </div>
+                <div class="container-fluid course-details c">
+                    <h5>Real Estate Investment</h5>
+                    <p class="course-description">
+                        Delve into the world of real estate investment, understanding property valuation, market
+                        analysis, and investment strategies.
+                    </p>
+
+                    <h6 class="alignleft">
+                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
+                        5 Modules
+                    </h6>
+
+                    <h6 class="alignright">
+                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
+                        8hrs 40mins
+                    </h6>
+                    <div class="clr"></div>
+                    <p class="text-end">
+                        <a href="">
+                            <button class="out-fill-btn">
+                                Learn Here
+                                <img src="{% static 'icons/arrow_right.svg' %}">
+                            </button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Get unlimited access to all courses  -->
+    <div class="container-fluid subscription-div div-padding bottom-margin home-nav-bg-white">
+        <div class="grid-container-subscription-div">
+            <div class="grid-subscription-div subscription-holder a">
+                <h2>Get unlimited access to all courses</h2>
+                <p>
+                    Subscribe to our annual membership now and gain <br class="desktop">unlimited access to our
+                    comprehensive range of <br class="desktop">courses in real estate and stock investments. Let's
+                    <br class="desktop">embark on this journey to financial success together!
+                </p>
+
+                <a href="">
+                    <button class="filled-btn-lg">
+                        Purchase Subscription
+                    </button>
+                </a>
+            </div>
+
+            <div class="grid-subscription-div subscription-pix a">
+                <img src="{% static 'images/ladywithlaptop.png' %}" class="img-fluid desktop">
+                <img src="{% static 'images/ladywithlaptop.png' %}" class="img-fluid phone">
+            </div>
+        </div>
+    </div>
+
+    <!-- Offer Personal Finance -->
+    <div class="container-fluid personal-finance-div div-padding">
+        <div class="container-fluid personal-finance-info c p-0 m-0">
+            <h2>
+                We offer personal financial <br class="desktop">coaching to individuals and <br
+                    class="desktop">corporate teams.
+            </h2>
+
+            <p>
+                Get tailored guidance and personalized strategies <br class="desktop">for your financial success.
+            </p>
+
+            <a href="">
+                <button class="filled-btn-lg">
+                    Book Consultation
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Investments -->
+    <div class="container-fluid investment-div-holder home-invest div-padding bottom-margin c">
+        <h2 class="home-h2">Investment corner</h2>
+        <div class="grid-container-investment-div">
+            <div class="container-fluid investment-div p-0 a">
+                <div class="property-img p-0">
+                    <img src="{% static 'images/building.png' %}" class="img-fluid">
+                </div>
+                <div class="investment-details c">
+                    <h5>Student Hostel Accommodation</h5>
+                    <h6>Location: Ihiagwa, Owerri</h6>
+                    <h6 class="last-h6">Starting price &#8358;12 million</h6>
+
+                    <a href="">
+                        <button class="out-fill-btn">
+                            View Details
+                            <img src="{% static 'icons/arrow_right.svg' %}">
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="container-fluid investment-div p-0 a">
+                <div class="property-img p-0">
+                    <img src="{% static 'images/building.png' %}" class="img-fluid">
+                </div>
+                <div class="investment-details c">
+                    <h5>Student Hostel Accommodation</h5>
+                    <h6>Location: Ihiagwa, Owerri</h6>
+                    <h6 class="last-h6">Starting price &#8358;12 million</h6>
+
+                    <a href="">
+                        <button class="out-fill-btn">
+                            View Details
+                            <img src="{% static 'icons/arrow_right.svg' %}">
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="container-fluid investment-div p-0 a">
+                <div class="property-img p-0">
+                    <img src="{% static 'images/building.png' %}" class="img-fluid">
+                </div>
+                <div class="investment-details c">
+                    <h5>Student Hostel Accommodation</h5>
+                    <h6>Location: Ihiagwa, Owerri</h6>
+                    <h6 class="last-h6">Starting price &#8358;12 million</h6>
+
+                    <a href="">
+                        <button class="out-fill-btn">
+                            View Details
+                            <img src="{% static 'icons/arrow_right.svg' %}">
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <center>
+            <a href="investments.html">
+                <button class="filled-btn-lg see-investments">
+                    See Investments
+                </button>
+            </a>
+        </center>
+    </div>
+
+    <!-- Special tools -->
+    <div class="container-fluid special-tools-div c">
+        <h2>Special tools</h2>
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 1 p-0 a">
+                    <div class="container-fluid tools-img p-0 m-0">
+                        <img src="{% static 'images/man-chart.jpg' %}" class="img-fluid mb-0">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 p-0 a">
+                    <div class="container-fluid special-tools-info b">
+                        <h5>Welcome to smart investing</h5>
+                        <p>
+                            We create tailored investment portfolios to help you achieve your financial goals.
+                            Whether you're a seasoned investor or just starting out, our recommendations can help
+                            you get a great start.
+                        </p>
+
+                        <a href="">
+                            <button class="filled-btn-lg">
+                                Create Portfolio
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
+    <!-- Calculate your potential ROI -->
+    <div class="container-fluid roi-div c">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 p-0 a">
+                    <div class="container-fluid roi-info b">
+                        <h5>Calculate your potential ROI</h5>
+                        <p>
+                            Curious about how much money you could earn from your next real estate investment? Use
+                            our investment calculator to estimate your potential return on investment (ROI).
+                        </p>
 
+                        <a href="{% url 'analyser:savings_calculator' %}">
+                            <button class="filled-btn-lg">
+                                Calculate ROI
+                            </button>
+                        </a>
+                    </div>
+                </div>
 
+                <div class="col-lg-6 col-md-6 col-sm-12 p-0 a">
+                    <div class="container-fluid tools-img roi-img m-0">
+                        <img src="{% static 'images/man-cal.jpg' %}" class="img-fluid mb-0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    {% endblock %}
+</main>
+{% endblock %}
+
+{% block modal %}
+{% include 'base/modal.html' %}
+{% endblock %}

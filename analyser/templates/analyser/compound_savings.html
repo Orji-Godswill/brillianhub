@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+<style>
+    /* Add a border to the input field */
+    .style-form input {
+        border: 1px solid #050505;
+        padding: 8px;
+        /* Optional: Add padding for better appearance */
+    }
+</style>
+
+<main class="main no-main">
+    <div class="container-fluid cal-div-holder div-holder home-nav-bg-green contact-div nav-clearance c">
+        <div class="grid-container-contact-div div-padding">
+            <div class="calculator-bg first-div-deatils  img-holder b">
+                <div class="container-fluid signup-holder2">
+                    <h2>Investor’s <br>Calculator</h2>
+                </div>
+            </div>
+
+            <div class="form-holder-div2 disclaimer-div-holder c">
+                <div class="container-fluid disclaimer-div disclaimer-div1 c">
+                    <h5>Compound Savings Calculator</h5>
+                    <p>
+                        A compound monthly savings calculator helps individuals plan and visualize their savings growth
+                        over time.
+                    </p>
+
+                    <p class="disclaimer-p">
+                        By inputting initial savings, interest rate, and contribution frequency, users can see how their
+                        money can grow through compounding. This tool aids in informed decision-making for long-term
+                        financial goals like retirement or education planning.
+                    </p>
+                </div>
+
+                <div id="form-container" class="container-fluid form-details c">
+
+                    {% include 'snippets/compound_savings_form.html' %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results div -->
+    <div class="container-fluid results-div home-nav-bg-white p-0 c" id="#">
+        <div class="grid-container-result-div p-0">
+            <div class="grid-item-result-div1 desktop b">
+                <div class="disclaimer-holder">
+                    <div class="container-fluid disclaimer-div p-0 c">
+                        <h5>Disclaimer</h5>
+                        <p>
+                            Our investor's calculator is designed to provide guidance on potential investment returns.
+                            It is essential to understand that this tool serves as a guide.
+                        </p>
+
+                        <p class="last-p">
+                            After using the calculator to assess rates and returns, we recommend booking a consultation
+                            with us for a comprehensive and detailed discussion tailored to your specific investment
+                            needs.
+                        </p>
+
+                        <a href="book-consultation.html">
+                            <button class="filled-btn-lg">Book Consultation</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item-result-div2 b">
+                <div class="container-fluid form-details c" style="background: #F3FDFD;">
+                    <div class="container-fluid earnings-div p-0">
+                        <div class="style-form form-mb">
+                            <label class="form-label">Total Savings</label>
+                            <input type="text" class="form-control" id="initial_deposit" readonly
+                                style="border: 1px solid #050505;">
+                        </div>
+
+                        <div class="style-form form-mb">
+                            <label class="form-label">Total Interest Paid</label>
+                            <input type="text" class="form-control" id="total_interest_paid" readonly
+                                style="border: 1px solid #050505;">
+                        </div>
+
+                        <div class="style-form form-mb">
+                            <label class="form-label">Total Return</label>
+                            <input type="text" class="form-control" id="total_return" readonly
+                                style="border: 1px solid #050505;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appears only on phone -->
+            <div class="grid-item-result-div1 phone b">
+                <div class="disclaimer-holder">
+                    <div class="container-fluid disclaimer-div p-0 c">
+                        <h5>Disclaimer</h5>
+                        <p>
+                            Our investor's calculator is designed to provide guidance on potential investment returns.
+                            It is essential to understand that this tool serves as a guide.
+                        </p>
+
+                        <p class="last-p">
+                            After using the calculator to assess rates and returns, we recommend booking a consultation
+                            with us for a comprehensive and detailed discussion tailored to your specific investment
+                            needs.
+                        </p>
+
+                        <a href="book-consultation.html">
+                            <button class="filled-btn-lg">Book Consultation</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learn more  -->
+    <div class="container-fluid learn-compound-div div-padding home-nav-bg-green a" id="earnings-div2">
+        <div class="learn-video-holder b">
+            <h5>Learn more about compounding savings</h5>
+
+            <iframe src="https://www.youtube.com/embed/gyiiqUQgEeA?si=lqpbNwDjbN-zmzqC" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+
+            <a href="https://www.youtube.com/embed/gyiiqUQgEeA?si=lqpbNwDjbN-zmzqC" target="_Blank">
+                <button class="filled-btn-lg ">
+                    Watch on YouTube
+                </button>
+            </a>
+        </div>
+    </div>
+
+
+</main>
+
+
+<script>
+    $(document).ready(function () {
+        $('#form-container').on('submit', 'form', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "analyser:savings_calculator" %}',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        // Display the result in the result-container
+                        // $('#result-container').html('<p>Result: ' + response.result + '</p>');
+
+                        document.getElementById("initial_deposit").value = response.savings;
+                        document.getElementById("total_interest_paid").value = response.profit;
+                        document.getElementById("total_return").value = response.result;
+
+
+                        document.getElementById("earnings-div2").style.display = "block";
+
+                    } else if (response.errors) {
+                        // Handle form validation errors (e.g., display error messages)
+                        alert('Form submission failed. Please correct the errors.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle other Ajax errors
+                    alert('An error occurred while submitting the form.');
+                }
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}

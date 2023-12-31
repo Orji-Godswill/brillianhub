@@ -7,18 +7,188 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <div class="container">
-        {% if stock %}
-        <h1 class="display-4">Latest on Stock Courses</h1>
-        <p>Join us as we explore a wide range of topics, from understanding basic financial concepts to mastering
-            advanced investment techniques. </p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-        {% else %}
-        <h1 class="display-4">Relax</h1>
-        {% endif %}
+<main class="main no-main">
+    <div class="container-fluid courses2-div-house home-nav-bg-green p-0 c">
+        <div class="grid-container-courses2-div">
+            <div class="partition courses-list-div-holder course-top-padding home-nav-bg-white desktop b">
+                <div class="container-fluid courses-list-div p-0 a">
+                    <h2>Courses</h2>
+                    <ul>
+                        <li class="active-course">
+                            <a href="modules.html">Personal Financial Management</a>
+                        </li>
+
+                        <li>
+                            <a href="modules.html">Stock Investment</a>
+                        </li>
+
+                        <li>
+                            <a href="modules.html">Real Estate Investment</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="partition courses-container-div course-top-padding b">
+                <div class="container-fluid courses-overview-div a">
+                    <!-- Continue where you left off -->
+                    <div class="container-fluid last-lesson-div home-nav-bg-white c">
+                        <h5>Continue where you left off</h5>
+                        <div class="grid-container-last-lesson">
+                            <div>
+                                <h6>
+                                    <img src="{% static 'icons/money.svg' %}" class="img-fluid icon-course">
+                                    &nbsp; Personal Financial Management
+                                </h6>
+                                <p class="mb-0">
+                                    3<span>/5 Lessons</span>
+                                </p>
+                            </div>
+
+                            <div class="continue-btn-div b">
+                                <p class="mb-0">
+                                    <a href="modules.html">
+                                        <button class="filled-btn-lg">
+                                            Continue Learning
+                                            <img src="{% static 'icons/arrow_right.svg' %}">
+                                        </button>
+                                    </a>
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Available Courses -->
+                    <div class="container-fluid grid-container-avail-courses available-courses b">
+
+                        <div class="container-fluid course-div-holder2 p-0 b">
+                            <div class="container-fluid course-div2 p-0 m-0">
+                                <div class="container-fluid course-img-holder2 p-0 m-0">
+                                    <img src="{% static 'images/meeting.jpg' %}" class="img-fluid course-img">
+                                </div>
+                                <div class="container-fluid course-details2 c">
+                                    <div class="heading-div">
+                                        <h5>Personal Financial Management</h5>
+                                    </div>
+
+                                    <div class="description-div">
+                                        <p class="course-description">
+                                            Gain knowledge and practical skills in managing your finances, from
+                                            budgeting & saving to debt management and long-term financial planning.
+                                        </p>
+                                    </div>
+
+                                    <h6 class="alignleft">
+                                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
+                                        5 Modules
+                                    </h6>
+
+                                    <h6 class="alignright phone">
+                                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
+                                        8hrs 40mins
+                                    </h6>
+                                    <div class="clr"></div>
+                                    <a href="modules.html">
+                                        <button class="out-fill-btn">
+                                            Start Learning
+                                            <img src="{% static 'icons/arrow_right.svg' %}">
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid course-div-holder2 p-0 b">
+                            <div class="container-fluid course-div2 p-0 m-0">
+                                <div class="container-fluid course-img-holder2 p-0 m-0">
+                                    <img src="{% static 'images/forex.jpg' %}" class="img-fluid course-img">
+                                </div>
+                                <div class="container-fluid course-details2 c">
+                                    <div class="heading-div">
+                                        <h5>Stock Investment</h5>
+                                    </div>
+
+                                    <div class="description-div">
+                                        <p class="course-description">
+                                            Explore the dynamics of the stock market and learn how to analyze stocks,
+                                            understand market trends, & make informed investment decisions.
+                                        </p>
+                                    </div>
+
+                                    <h6 class="alignleft">
+                                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
+                                        5 Modules
+                                    </h6>
+
+                                    <h6 class="alignright phone">
+                                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
+                                        8hrs 40mins
+                                    </h6>
+                                    <div class="clr"></div>
+                                    <a href="modules.html">
+                                        <button class="out-fill-btn">
+                                            Start Learning
+                                            <img src="icons/arrow_right.svg">
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid course-div-holder2 p-0 b">
+                            <div class="container-fluid course-div2 p-0 m-0">
+                                <div class="container-fluid course-img-holder2 p-0 m-0">
+                                    <img src="{% static 'images/hotel.jpg' %}" class="img-fluid course-img">
+                                </div>
+                                <div class="container-fluid course-details2 c">
+                                    <div class="heading-div">
+                                        <h5>Real Estate Investment</h5>
+                                    </div>
+
+                                    <div class="description-div">
+                                        <p class="course-description">
+                                            Delve into the world of real estate investment, understanding property
+                                            valuation, market analysis, and investment strategies.
+                                        </p>
+                                    </div>
+
+                                    <h6 class="alignleft">
+                                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
+                                        5 Modules
+                                    </h6>
+
+                                    <h6 class="alignright phone">
+                                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
+                                        8hrs 40mins
+                                    </h6>
+                                    <div class="clr"></div>
+                                    <a href="modules.html">
+                                        <button class="out-fill-btn">
+                                            Start Learning
+                                            <img src="{% static 'icons/arrow_right.svg' %}">
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</main>
+
+
+
+
+
+
+{%endblock %}
+
+
 
 <main role="main">
 
@@ -47,6 +217,3 @@
     </div> <!-- /container -->
 
 </main>
-
-
-{%endblock %}

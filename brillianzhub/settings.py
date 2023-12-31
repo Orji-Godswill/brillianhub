@@ -39,8 +39,6 @@ INSTALLED_APPS = [
 
     'mathfilters',
     'robots',
-    'crispy_forms',
-    'crispy_bootstrap4',
 
     'analyser',
     'blog',

@@ -49,5 +49,4 @@ def savings_calculator_view(request):
     context = {
         'form': form,
     }
-
-    return render(request, 'analyser/calculator.html', context)
+    return render(request, 'analyser/compound_savings.html', context)

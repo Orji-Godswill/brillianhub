@@ -1,35 +1,73 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container px-lg-5">
-        <a class="navbar-brand" href="{% url 'home' %}">Brillianz Hub</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-                class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" aria-current="page"
-                        href="{% url 'course:course_list' %}">Courses</a>
+{% load static %}
+
+<header class="fixed-top a">
+    <nav class="container-fluid div-padding home-nav-bg-green desktop main-nav b">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/logo/dnav_logo.png' %}" alt="Brillianzhub logo" class="img-fluid nav-logo b">
+        </a>
+
+        <div class="nav-links c">
+            <ul>
+                <li>
+                    <a href="{% url 'about' %}" class="active-page">About</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'package:packages' %}">Investments Packages</a>
+                <li>
+                    <a href="{% url 'course:course_list' %}">Courses</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Financial Calculator<i class="ti-angle-down"></i></a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown03">
-                        <a class="dropdown-item" href="{% url 'analyser:savings_calculator' %}">Savings Calculator</a>
-                        <a class="dropdown-item" href="#">Estimate ROI Real Estimate</a>
-                        <a class="dropdown-item" href="#">Actual Returns on Stock Calculator</a>
-                        <a class="dropdown-item" href="#">Expected Returns on Stock Calculator</a>
+                <li>
+                    <a href="{% url 'package:packages' %}">Investments</a>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Calculator
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'analyser:savings_calculator' %}">
+                                    <img src="{% static 'icons/nav-money.svg' %}" class="img-fluid icon-course">&nbsp;
+                                    <span>Compound Savings Calculator</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="stock-calculator.html">
+                                    <img src="{% static 'icons/nav-stock.svg' %}" class="img-fluid icon-course">&nbsp;
+                                    <span>Stock Investment Calculator</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="real-estate-calculator.html">
+                                    <img src="{% static 'icons/nav-investment.svg' %}"
+                                        class="img-fluid icon-course">&nbsp;
+                                    <span>Real Estate Investment Calculator</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </li>
-                {% if request.user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:account-home' %}">My Portfolio</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
-                {% else %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Log in</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Sign up</a></li>
-                {% endif %}
-
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+                <li class="btn-link">
+                    <a href="{% url 'accounts:login' %}" class="account_btn">My Account
+                    </a>
+                </li>
             </ul>
         </div>
+    </nav>
+
+    <div class="header phone">
+        <nav class="vnav  home-nav-bg-green">
+            <a href="index.html">
+                <img src="{% static 'images/logo/logoMenu.png' %}" alt="Brillianzhub logo" class="phone-header-logo">
+            </a>
+
+            <a href="" data-bs-toggle="modal" data-bs-target="#menuModal">
+                <img src="{% static 'icons/menu.svg' %}" class="nav__icon">
+            </a>
+        </nav>
     </div>
-</nav>
+</header>
