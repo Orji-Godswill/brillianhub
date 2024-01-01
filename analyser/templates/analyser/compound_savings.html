@@ -49,7 +49,7 @@
     </div>
 
     <!-- Results div -->
-    <div class="container-fluid results-div home-nav-bg-white p-0 c" id="#">
+    <div class="container-fluid results-div home-nav-bg-white p-0 c" id="response_container">
         <div class="grid-container-result-div p-0">
             <div class="grid-item-result-div1 desktop b">
                 <div class="disclaimer-holder">
@@ -151,6 +151,8 @@
 
             var formData = $(this).serialize();
 
+            var response_show = document.getElementById("response_container");
+
             $.ajax({
                 type: 'POST',
                 url: '{% url "analyser:savings_calculator" %}',
@@ -164,8 +166,9 @@
                         document.getElementById("total_interest_paid").value = response.profit;
                         document.getElementById("total_return").value = response.result;
 
+                        // document.getElementById("earnings-div2").style.display = "block";
 
-                        document.getElementById("earnings-div2").style.display = "block";
+                        response_show.scrollIntoView({ behavior: 'smooth' });
 
                     } else if (response.errors) {
                         // Handle form validation errors (e.g., display error messages)

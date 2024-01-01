@@ -63,21 +63,22 @@
                     <!-- Available Courses -->
                     <div class="container-fluid grid-container-avail-courses available-courses b">
 
+                        {% for course in courses %}
                         <div class="container-fluid course-div-holder2 p-0 b">
                             <div class="container-fluid course-div2 p-0 m-0">
+
+                                {% if course.image %}
                                 <div class="container-fluid course-img-holder2 p-0 m-0">
-                                    <img src="{% static 'images/meeting.jpg' %}" class="img-fluid course-img">
+                                    <img src="{{ course.image.url }}" class="img-fluid course-img">
                                 </div>
+                                {% endif %}
                                 <div class="container-fluid course-details2 c">
                                     <div class="heading-div">
-                                        <h5>Personal Financial Management</h5>
+                                        <h5>{{ course.title }}</h5>
                                     </div>
 
                                     <div class="description-div">
-                                        <p class="course-description">
-                                            Gain knowledge and practical skills in managing your finances, from
-                                            budgeting & saving to debt management and long-term financial planning.
-                                        </p>
+                                        <p class="course-description">{{ course.description }}</p>
                                     </div>
 
                                     <h6 class="alignleft">
@@ -90,7 +91,7 @@
                                         8hrs 40mins
                                     </h6>
                                     <div class="clr"></div>
-                                    <a href="modules.html">
+                                    <a href="{% url 'course:course_detail' pk=course.pk %}">
                                         <button class="out-fill-btn">
                                             Start Learning
                                             <img src="{% static 'icons/arrow_right.svg' %}">
@@ -99,121 +100,12 @@
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
 
-                        <div class="container-fluid course-div-holder2 p-0 b">
-                            <div class="container-fluid course-div2 p-0 m-0">
-                                <div class="container-fluid course-img-holder2 p-0 m-0">
-                                    <img src="{% static 'images/forex.jpg' %}" class="img-fluid course-img">
-                                </div>
-                                <div class="container-fluid course-details2 c">
-                                    <div class="heading-div">
-                                        <h5>Stock Investment</h5>
-                                    </div>
-
-                                    <div class="description-div">
-                                        <p class="course-description">
-                                            Explore the dynamics of the stock market and learn how to analyze stocks,
-                                            understand market trends, & make informed investment decisions.
-                                        </p>
-                                    </div>
-
-                                    <h6 class="alignleft">
-                                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
-                                        5 Modules
-                                    </h6>
-
-                                    <h6 class="alignright phone">
-                                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
-                                        8hrs 40mins
-                                    </h6>
-                                    <div class="clr"></div>
-                                    <a href="modules.html">
-                                        <button class="out-fill-btn">
-                                            Start Learning
-                                            <img src="icons/arrow_right.svg">
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="container-fluid course-div-holder2 p-0 b">
-                            <div class="container-fluid course-div2 p-0 m-0">
-                                <div class="container-fluid course-img-holder2 p-0 m-0">
-                                    <img src="{% static 'images/hotel.jpg' %}" class="img-fluid course-img">
-                                </div>
-                                <div class="container-fluid course-details2 c">
-                                    <div class="heading-div">
-                                        <h5>Real Estate Investment</h5>
-                                    </div>
-
-                                    <div class="description-div">
-                                        <p class="course-description">
-                                            Delve into the world of real estate investment, understanding property
-                                            valuation, market analysis, and investment strategies.
-                                        </p>
-                                    </div>
-
-                                    <h6 class="alignleft">
-                                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
-                                        5 Modules
-                                    </h6>
-
-                                    <h6 class="alignright phone">
-                                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
-                                        8hrs 40mins
-                                    </h6>
-                                    <div class="clr"></div>
-                                    <a href="modules.html">
-                                        <button class="out-fill-btn">
-                                            Start Learning
-                                            <img src="{% static 'icons/arrow_right.svg' %}">
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
 </main>
 
-
-
-
-
-
-{%endblock %}
-
-
-
-<main role="main">
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-
-
-            {% for course in courses %}
-
-            <div class="col-md-4">
-                <h2>{{ course.title }}</h2>
-                <p>{{obj.description }} </p>
-                <p><a class="btn btn-secondary" href="{% url 'course:course_detail' pk=course.pk %}" role="button">View
-                        details
-                        &raquo;</a></p>
-            </div>
-            {% endfor %}
-
-        </div>
-
-        <hr>
-
-    </div> <!-- /container -->
-
-</main>
+{% endblock %}
