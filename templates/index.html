@@ -13,21 +13,22 @@
             <div class="grid-item-hero-div a">
                 <div class="container-fluid hero-div-info c">
                     <img src="{% static 'icons/path1960.svg' %}" class="img-fluid path-img">
-                    <h2>Your Personal<br>Investment <br class="phone">Training Hub</h2>
-                    <p>Benefit from expert insights and time-tested <br class="desktop">strategies to achieve
-                        financial success and stability.</p>
+                    <h2 class="animationY">Your Personal<br>Investment <br class="phone">Training Hub</h2>
+                    <p class="animationY">Benefit from expert insights and time-tested <br class="desktop">strategies to
+                        achieve financial success and stability.</p>
 
                     <div class="container-fluid hero-button-div p-0 b">
                         <a href="{% url 'course:course_list' %}">
-                            <button class="filled-btn-lg">Browse Hub</button>
+                            <button class="filled-btn-lg animationY">Browse Hub</button>
                         </a>
 
-                        <a href="book-consultation.html">
-                            <button class="out-fill-btn-lg">Book Consultation</button>
+                        <a href="{% url 'consult:book_appointment' %}">
+                            <button class="out-fill-btn-lg animationL">Book Consultation</button>
                         </a>
 
                     </div>
-                    <img src="{% static 'icons/savings.svg' %}" class="img-fluid savings-img desktop">
+
+                    <img src="{% static 'icons/savings.svg' %}" class="img-fluid savings-img animation desktop">
                 </div>
 
             </div>
@@ -35,11 +36,11 @@
             <div class="grid-item-hero-div a hero-img">
                 <img src="{% static 'images/sky-scrapper.png' %}" class="img-fluid hero-img2">
 
-
                 <img src="{% static 'icons/savings.svg' %}" class="img-fluid savings-img phone">
             </div>
         </div>
     </div>
+
 
     <!-- Who are We -->
     <div class="container-fluid who-are-we-div div-padding bottom-margin c">
@@ -50,25 +51,26 @@
 
             <div class="grid-item-who-are-we a">
                 <div class="container-fluid who-are-we-info p-0 m-0 c">
-                    <h2>Brillianzhub<h2>
+                    <h2 class="animationR">Brillianzhub<h2>
 
-                            <h6>We are...</h6>
-                            <p>
+                            <h6 class="animationD">We are...</h6>
+                            <p class="animationR">
                                 Brillianzhub, a top financial coaching firm in Stuttgart. We <br
                                     class="desktop">specialize in educating individuals on real estate and stock <br
                                     class="desktop">investments, providing personalized coaching to help our <br
                                     class="desktop">clients secure their financial future.
                             </p>
 
-                            <p>
-                                Our dedicated team is committed to empowering you with <br class="desktop">the
-                                knowledge and tools needed for successful investments <br class="desktop">and
-                                financial well-being.
+                            <p class="animationY">
+                                Our dedicated team is committed to empowering you with <br class="desktop">the knowledge
+                                and tools needed for successful investments <br class="desktop">and financial
+                                well-being.
                             </p>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Why You Should Invest -->
     <div class="container-fluid why-invest-div div-padding  home-nav-bg-green b">
@@ -92,7 +94,7 @@
                 <h6 id="outside-heading1">Financial Literacy</h6>
                 <div class="why-invest-detail" id="why-invest-detail1">
                     <h6>Financial Literacy</h6>
-                    <p>
+                    <p class="animationS">
                         Gaining investment knowledge enhances your financial literacy and understanding of market
                         dynamics.
                     </p>
@@ -105,7 +107,7 @@
                 <h6 id="outside-heading2">Wealth Building</h6>
                 <div class="why-invest-detail" id="why-invest-detail2">
                     <h6>Wealth Building</h6>
-                    <p>
+                    <p class="animationS">
                         Investing in real estate and stocks can be a powerful tool for building long-term wealth and
                         financial stability.
                     </p>
@@ -118,7 +120,7 @@
                 <h6 id="outside-heading3">Risk Management</h6>
                 <div class="why-invest-detail" id="why-invest-detail3">
                     <h6>Risk Management</h6>
-                    <p>
+                    <p class="animationS">
                         Learning investment strategies helps you manage risks effectively, minimizing potential
                         financial losses.
                     </p>
@@ -131,14 +133,14 @@
                 <h6 id="outside-heading4">Future Planning</h6>
                 <div class="why-invest-detail" id="why-invest-detail4">
                     <h6>Future Planning</h6>
-                    <p>
-                        Acquiring investment knowledge aids in effective long-term financial planning and goal
-                        setting.
+                    <p class="animationS">
+                        Acquiring investment knowledge aids in effective long-term financial planning and goal setting.
                     </p>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Browse hub -->
     <div class="container-fluid browse-hub-div div-padding bottom-margin home-nav-bg-white">
@@ -270,12 +272,12 @@
     <!-- Offer Personal Finance -->
     <div class="container-fluid personal-finance-div div-padding">
         <div class="container-fluid personal-finance-info c p-0 m-0">
-            <h2>
+            <h2 class="animationL">
                 We offer personal financial <br class="desktop">coaching to individuals and <br
                     class="desktop">corporate teams.
             </h2>
 
-            <p>
+            <p class="animationS">
                 Get tailored guidance and personalized strategies <br class="desktop">for your financial success.
             </p>
 

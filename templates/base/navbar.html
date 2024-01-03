@@ -51,10 +51,25 @@
                 <li>
                     <a href="contact.html">Contact</a>
                 </li>
+
+                {% if request.user.is_authenticated %}
                 <li class="btn-link">
-                    <a href="{% url 'accounts:login' %}" class="account_btn">My Account
+                    <a href="{% url 'accounts:account-home' %}" class="account_btn">My Account
                     </a>
                 </li>
+                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'accounts:account-home' %}">My Portfolio</a></li> -->
+                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li> -->
+                {% else %}
+                <li class="btn-link">
+                    <a href="{% url 'accounts:account-home' %}" class="account_btn">Login
+                    </a>
+                </li>
+
+                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Sign up</a></li> -->
+                {% endif %}
+
+
+
             </ul>
         </div>
     </nav>

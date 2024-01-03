@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'dividend',
     'course',
     'students',
+    'consult',
 ]
 
 

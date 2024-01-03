@@ -38,7 +38,7 @@ urlpatterns = [
     path('dividend/', include('dividend.urls')),
     path('courses/', include("course.urls")),
     path('students/', include('students.urls')),
-
+    path('book_appointment/', include("consult.urls")),
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('contact/', views.contact_view, name="contact"),
@@ -50,5 +50,7 @@ urlpatterns = [
 
 ]
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = urlpatterns + \
+    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns = urlpatterns + \
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

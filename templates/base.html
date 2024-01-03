@@ -27,6 +27,18 @@
     <!-- scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+    <link rel="stylesheet" href="{% static 'stylesheet/datetimepicker.css' %}">
+    <!-- <script src="{% static 'path/to/jquery.js' %}"></script> -->
+    <script src="{% static 'js/jquery.datetimepicker.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datetimepicker').datetimepicker({
+                format: 'Y-m-d H:i',  // Adjust the format as needed
+                step: 15  // Set the step to 15 minutes or adjust as needed
+            });
+        });
+    </script>
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logo/favicon.png' %}">
     <!--Font awsome-->
@@ -49,7 +61,7 @@
 
 </head>
 
-<body>
+<body onload="howItWorks()">
     <!-- Navigation bar -->
     {% block navbar %}
 
@@ -76,6 +88,9 @@
     <!-- Menu Modal -->
     {% include 'base/modal.html' %}
 
+
+
+    <script type="text/javascript" src="{% static 'js/index_js.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'js/ha.js' %}"></script>
 

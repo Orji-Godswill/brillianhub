@@ -14,7 +14,6 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('taggit', '0004_auto_20231026_1423'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -22,26 +21,34 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
             name='Blog',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=350)),
                 ('description', models.TextField(blank=True, null=True)),
                 ('slug', models.SlugField(blank=True, unique=True)),
                 ('body', ckeditor_uploader.fields.RichTextUploadingField()),
-                ('publish', models.DateTimeField(default=django.utils.timezone.now)),
+                ('publish', models.DateTimeField(
+                    default=django.utils.timezone.now)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('image', models.ImageField(blank=True, null=True, upload_to=blog.models.upload_image_path)),
+                ('image', models.ImageField(blank=True, null=True,
+                 upload_to=blog.models.upload_image_path)),
                 ('featured', models.BooleanField(default=False)),
-                ('status', models.CharField(choices=[('draft', 'Draft'), ('published', 'Published')], default='draft', max_length=10)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='post_category', to='blog.category')),
-                ('tags', taggit.managers.TaggableManager(help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='accounts_users', to=settings.AUTH_USER_MODEL)),
+                ('status', models.CharField(choices=[
+                 ('draft', 'Draft'), ('published', 'Published')], default='draft', max_length=10)),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='post_category', to='blog.category')),
+                ('tags', taggit.managers.TaggableManager(help_text='A comma-separated list of tags.',
+                 through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='accounts_users', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('-publish',),

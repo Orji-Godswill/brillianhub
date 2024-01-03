@@ -6,119 +6,288 @@
 {% endblock %}
 
 {% block content %}
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron" style="background-color: #f6e6d9;">
-    <div class="container">
-        <h1 class="display-3">Who are we ?</h1>
-        <p>We are poised to delivering high-quality financial analysis, stock market analysis,
-            and investment ideas to help you navigate the intricacies of the financial world </p>
-        <p><a class="btn btn-lg" href="#" role="button" style="background-color: #ff4500;">Learn more &raquo;</a></p>
+<main class="main">
+    <!-- Hero -->
+    <div class="container-fluid about-banner div-padding bottom-margin home-nav-bg-white c">
+        <div class="grid-container-about-banner b">
+            <div class="container-fluid about-div-info a">
+                <h2>About Brillianzhub</h2>
+                <p class="info-p">
+                    At Brillianzhub, we strive to be your trusted partner in securing your financial future.
+                </p>
+                <p>
+                    With our comprehensive approach to real estate, stocks, and financial coaching, we provide tailored
+                    solutions that enable you to make informed investment decisions, grow your wealth, and achieve
+                    long-term financial success.
+                </p>
+            </div>
+
+            <div class="hero-img p-0">
+                <img src="{% static 'images/lady_coffee.png' %}" class="img-fluid">
+            </div>
+        </div>
     </div>
-</div>
-<main role="main">
 
-
-
-
-
-    <div class="container marketing">
-        <!-- START THE FEATURETTES -->
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="#">Financial Analysis</h2>
-                <p class="lead">Our team of experienced financial analysts diligently examines various aspects of the
-                    market, including economic trends, industry performance, and company fundamentals. We employ
-                    advanced techniques and tools to analyze financial data, identify patterns, and uncover hidden
-                    opportunities. Whether you're an individual investor, a business owner, or a financial professional,
-                    our financial analysis services offer deep insights and actionable recommendations to navigate the
-                    complex world of finance.</p>
+    <!-- Lesson Counter -->
+    <div class="container-fluid users-counter-holder div-padding bottom-margin">
+        <div class="container-fluid grid-users-counter bg-dark-blue">
+            <div class="grid-item-users">
+                <h5>40+</h5>
+                <p>Lessons on <br>investments</p>
             </div>
-            <div class="col-md-5">
-                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/finance.png' %}"
-                    alt="Generic placeholder image">
+
+            <div class="grid-item-users">
+                <h5>40+</h5>
+                <p>Lessons on <br>investments</p>
+            </div>
+
+            <div class="grid-item-users">
+                <h5>40+</h5>
+                <p>years of <br>experience</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="container-fluid testimonial-holder1 div-padding bottom-margin b">
+        <div class="grid-container-testimonial">
+            <div class="testimonial-hold-div p-0 b">
+                <div class="container-fluid testimonial-holder bg-dark-blue">
+                    <h5>Testimonials</h5>
+                    <div class="container-fluid testimonial-holder-div p-0">
+                        <div class="quote-div alignleft">
+                            <!-- <h1>&#34;</h1> -->
+                            <img src="{% static 'images/comma.png' %}" class="img-fluid">
+                        </div>
+
+                        <div class="testimony home-nav-bg-green alignright">
+                            <div class="myTestimony p-0">
+                                <p>
+                                    Your courses have been an incredible resource for me. With clear, insightful
+                                    guidance, I've gained a deeper understanding of real estate and stock investments.
+                                    The practical knowledge I've acquired has empowered me to make informed financial
+                                    decisions with confidence.<br><br>
+
+                                    Thank you for equipping me with the tools to navigate the complexities of the
+                                    investment world
+                                </p>
+
+                                <h6>Alex Johnson</h6>
+                            </div>
+
+                            <div class="myTestimony p-0">
+                                <p>
+                                    The practical knowledge I've acquired has empowered me to make informed financial
+                                    decisions with confidence.<br><br>
+
+                                    Thank you for equipping me with the tools to navigate the complexities of the
+                                    investment world
+                                </p>
+
+                                <h6>Musa Johnson</h6>
+                            </div>
+
+                            <div class="myTestimony p-0">
+                                <p>
+                                    Your courses have been an incredible resource for me. With clear, insightful
+                                    guidance, I've gained a deeper understanding of real estate and stock investments.
+                                    The practical knowledge I've acquired has empowered me to make informed financial
+                                    decisions with confidence.<br><br>
+
+                                    Thank you for equipping me with the tools to navigate the complexities of the
+                                    investment world
+                                </p>
+
+                                <h6>Uba Johnson</h6>
+                            </div>
+
+                            <!-- This is the control buttons -->
+                            <center class="mb-0">
+                                <div class="slider-icons-div p-0">
+                                    <img class="{% static 'img-fluid dot-icon' %}" onclick="currentSlide(1)">
+                                    <img class="{% static 'img-fluid dot-icon' %}" onclick="currentSlide(2)">
+                                    <img class="{% static 'img-fluid dot-icon' %}" onclick="currentSlide(3)">
+                                </div>
+                            </center>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-hold-div p-0 desktop b">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Partners -->
+    <div class="container-fluid partners-div-holder div-padding bottom-margin b">
+        <h2>Our Partners</h2>
+        <section class="customer-logos slider">
+            <div class="slide"><img
+                    src="https://image.freepik.com/free-vector/luxury-letter-e-logo-design_1017-8903.jpg"></div>
+            <div class="slide"><img src="https://image.freepik.com/free-vector/3d-box-logo_1103-876.jpg"></div>
+            <div class="slide"><img src="https://image.freepik.com/free-vector/blue-tech-logo_1103-822.jpg"></div>
+            <div class="slide"><img
+                    src="https://image.freepik.com/free-vector/colors-curl-logo-template_23-2147536125.jpg"></div>
+            <div class="slide"><img src="https://image.freepik.com/free-vector/abstract-cross-logo_23-2147536124.jpg">
+            </div>
+            <div class="slide"><img src="https://image.freepik.com/free-vector/football-logo-background_1195-244.jpg">
+            </div>
+            <div class="slide"><img
+                    src="https://image.freepik.com/free-vector/background-of-spots-halftone_1035-3847.jpg"></div>
+
+        </section>
+    </div>
+
+    <!-- Meet the team -->
+    <div class="container-fluid team-div-holder div-padding bottom-margin team-mb b">
+        <h2>Meet the team</h2>
+        <div class="grid-container-team p-0 c">
+            <div class="container-fluid team-member team-member1">
+                <!-- <img src="images/boy.jpg" class="img-fluid alignleft"> -->
+                <div class="member-info home-nav-bg-white">
+                    <h5>John Doe</h5>
+                    <h6>Chief Executive Officer</h6>
+                </div>
+                <div class="clr"></div>
+            </div>
+
+            <div class="container-fluid team-member team-member1">
+                <!-- <img src="images/boy.jpg" class="img-fluid alignleft"> -->
+                <div class="member-info home-nav-bg-white">
+                    <h5>John Doe</h5>
+                    <h6>Chief Executive Officer</h6>
+                </div>
+                <div class="clr"></div>
+            </div>
+
+            <div class="container-fluid team-member team-member1">
+                <!-- <img src="images/boy.jpg" class="img-fluid alignleft"> -->
+                <div class="member-info home-nav-bg-white">
+                    <h5>John Doe</h5>
+                    <h6>Chief Executive Officer</h6>
+                </div>
+                <div class="clr"></div>
+            </div>
+
+            <div class="container-fluid team-member team-member1">
+                <!-- <img src="images/boy.jpg" class="img-fluid alignleft"> -->
+                <div class="member-info home-nav-bg-white">
+                    <h5>John Doe</h5>
+                    <h6>Chief Executive Officer</h6>
+                </div>
+                <div class="clr"></div>
             </div>
         </div>
 
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-                <h2 class="#">Stock Market Analysis</h2>
-                <p class="lead">Stay ahead of the curve with our comprehensive stock market analysis. Our analysts
-                    closely monitor the global markets, track market movements, and identify potential investment
-                    opportunities. We provide in-depth research on individual stocks, sectors, and market trends to help
-                    you make well-informed decisions. Whether you're a seasoned investor or just starting out, our stock
-                    market analysis will equip you with the knowledge and insights necessary to thrive in today's
-                    dynamic market environment.</p>
+        <center>
+            <div class="p-0" id="about_btn">
+                <button class="out-fill-btn about-btn" onclick="viewTeamMembers()">
+                    View More
+                    <img src="{% static 'icons/arrow_down_about.svg' %}">
+                </button>
             </div>
-            <div class="col-md-5 order-md-1">
-                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/stocks.jpg' %}"
-                    alt="Generic placeholder image">
+        </center>
+
+        <div class="grid-container-team p-0 c" id="team-members">
+            <div class="container-fluid team-member team-member1">
+                <!-- <img src="images/boy.jpg" class="img-fluid alignleft"> -->
+                <div class="member-info home-nav-bg-white">
+                    <h5>John Doe</h5>
+                    <h6>Chief Executive Officer</h6>
+                </div>
+                <div class="clr"></div>
+            </div>
+
+            <div class="container-fluid team-member team-member1">
+                <!-- <img src="images/boy.jpg" class="img-fluid alignleft"> -->
+                <div class="member-info home-nav-bg-white">
+                    <h5>John Doe</h5>
+                    <h6>Chief Executive Officer</h6>
+                </div>
+                <div class="clr"></div>
+            </div>
+
+            <div class="container-fluid team-member team-member1">
+                <!-- <img src="images/boy.jpg" class="img-fluid alignleft"> -->
+                <div class="member-info home-nav-bg-white">
+                    <h5>John Doe</h5>
+                    <h6>Chief Executive Officer</h6>
+                </div>
+                <div class="clr"></div>
+            </div>
+
+            <div class="container-fluid team-member team-member1">
+                <!-- <img src="images/boy.jpg" class="img-fluid alignleft"> -->
+                <div class="member-info home-nav-bg-white">
+                    <h5>John Doe</h5>
+                    <h6>Chief Executive Officer</h6>
+                </div>
+                <div class="clr"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How our consultation works -->
+    <div class="container-fluid consultation-div-holder div-padding b">
+        <h2>How our <br class="phone">consultation works</h2>
+        <p>
+            Get tailored guidance and personalized strategies for <br class="desktop">your financial success in these
+            four simple steps:
+        </p>
+
+        <div class="container-fluid consultation-div p-0">
+            <div class="grid-container-consultation">
+                <div class="instruction-div instruct-highlight">
+                    <h5>Free Initial consultation</h5>
+                    <p>
+                        During our introductory meeting, we attentively listen to your financial goals, current
+                        situation, and career aspirations.
+                    </p>
+                </div>
+
+                <div class="instruction-div">
+                    <h5> Discover our approach and services</h5>
+                    <p>
+                        Explore our company's services, operational methods, pricing, and important disclaimers.
+                    </p>
+                </div>
+
+                <div class="instruction-div">
+                    <h5>Contract signing</h5>
+                    <p>
+                        Proceed with the signing of the contract.
+                    </p>
+                </div>
+
+                <div class="instruction-div">
+                    <h5>Coaching commences</h5>
+                    <p>
+                        Personal/team coaching classes and exercises commence.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bootom arrows -->
+            <div class="container-fluid desktop p-0">
+                <img src="{% static 'icons/aboutpage_arrow.svg' %}" class="img-fluid about-arrow" id="arrow1">
+                <img src="{% static 'icons/aboutpage_arrow.svg' %}" class="img-fluid about-arrow arrowl" id="arrow2">
+                <img src="{% static 'icons/aboutpage_arrow.svg' %}" class="img-fluid about-arrow arrowl" id="arrow3">
             </div>
         </div>
 
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="#">Investment Ideas Blogging</h2>
-                <p class="lead">Looking for fresh investment ideas and perspectives? Our engaging and informative
-                    investment ideas blog is the perfect resource for you. Our team of experts regularly publishes
-                    articles, opinion pieces, and market insights covering a wide range of investment topics. From value
-                    investing to growth strategies, from dividend stocks to cryptocurrency trends, our blog caters to
-                    investors of all backgrounds and interests. Explore our blog to discover new investment
-                    opportunities, learn valuable strategies, and gain a deeper understanding of the ever-evolving
-                    financial landscape.</p>
-            </div>
-            <div class="col-md-5">
-                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/investment.jpg' %}"
-                    alt="Generic placeholder image">
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-                <h2 class="#">Educational Resources</h2>
-                <p class="lead">We believe in empowering individuals with knowledge and expertise. In addition to our
-                    analysis and blog content, we offer a rich collection of educational resources to help you expand
-                    your financial acumen. From beginner's guides to advanced tutorials, we cover topics such as
-                    investment fundamentals, risk management, portfolio diversification, and more. Our aim is to provide
-                    you with the tools and resources necessary to enhance your financial literacy and make informed
-                    investment decisions.</p>
-            </div>
-            <div class="col-md-5 order-md-1">
-                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/education.jpg' %}"
-                    alt="Generic placeholder image">
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="#">Community & Support</h2>
-                <p class="lead">
-                    Join our vibrant community of like-minded individuals who share a passion for finance and investing.
-                    Engage in discussions, share insights, and learn from fellow investors through our interactive
-                    forums and
-                    social media channels. Additionally, our dedicated support team is always ready to assist you with
-                    any inquiries, providing
-                    prompt and personalized assistance to ensure your experience on our website is seamless and
-                    enjoyable.</p>
-            </div>
-            <div class="col-md-5">
-                <img class="featurette-image img-fluid mx-auto" src="{% static 'img/about/networking.png' %}"
-                    alt="Generic placeholder image">
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <!-- /END THE FEATURETTES -->
-
-    </div><!-- /.container -->
+        <center>
+            <!-- calendly link -->
+            <a href="">
+                <button class="filled-btn-lg">
+                    Book Your Consultation Now
+                </button>
+            </a>
+        </center>
+    </div>
 
 </main>
+
 {% endblock %}

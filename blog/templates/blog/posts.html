@@ -7,43 +7,45 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <div class="container">
-        <h1 class="display-4">Latest on Investment Ideas</h1>
-        <p>Join us as we explore a wide range of topics, from understanding basic financial concepts to mastering
-            advanced investment techniques. </p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+<main class="main no-main">
+    <div class="container-fluid blog-hero-img blog-img div-padding c">
+        <h2>Blog</h2>
     </div>
-</div>
 
+    <!-- Latest Posts -->
+    <div class="container-fluid blog-holder c">
+        <div class="grid-container-browse-post-div c">
 
-<main role="main">
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
             {% for post in post %}
-            <div class="col-md-4">
-                <h2>{{ post.title }}</h2>
+            <div class="blog-post b">
                 {% if post.image %}
-                <img src="{{ post.image.url }}" alt="..." class="img-thumbnail">
-                {% endif %}
-                <p>{{post.description }} </p>
-                <p><a class="btn btn-secondary" href="{% url 'blog:post_detail' slug=post.slug %}" role="button">View
-                        details
-                        &raquo;</a></p>
+                <div class="post-img">
+                    <img src="{{ post.image.url }}" class="img-fluid">
+                </div>
+                {%endif %}
+                <div class="post-details">
+                    <h6>{{ post.publish }}</h6>
+                    <div class="post-title-div p-0">
+                        <h5>{{ post.title }}</h5>
+                    </div>
+
+                    <p>
+                        {{ post.description }}
+                    </p>
+
+                    <a href="{% url 'blog:post_detail' slug=post.slug %}">
+                        <button class="out-fill-btn">
+                            Read More
+                            <img src="{% static 'icons/arrow_right.svg' %}">
+                        </button>
+                    </a>
+                </div>
             </div>
             {% endfor %}
 
         </div>
-
-        <hr>
-
-    </div> <!-- /container -->
-
+    </div>
 </main>
 
 
-{%endblock %}
+{% endblock %}
