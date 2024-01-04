@@ -14,17 +14,11 @@
                 <div class="container-fluid courses-list-div p-0 a">
                     <h2>Courses</h2>
                     <ul>
-                        <li class="active-course">
-                            <a href="modules.html">Personal Financial Management</a>
+                        {% for obj in courses %}
+                        <li class="#">
+                            <a href="{% url 'course:course_detail' pk=obj.pk slug=obj.slug %}">{{ obj.title }}</a>
                         </li>
-
-                        <li>
-                            <a href="modules.html">Stock Investment</a>
-                        </li>
-
-                        <li>
-                            <a href="modules.html">Real Estate Investment</a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -91,7 +85,7 @@
                                         8hrs 40mins
                                     </h6>
                                     <div class="clr"></div>
-                                    <a href="{% url 'course:course_detail' pk=course.pk %}">
+                                    <a href="{% url 'course:course_detail' pk=course.pk slug=course.slug %}">
                                         <button class="out-fill-btn">
                                             Start Learning
                                             <img src="{% static 'icons/arrow_right.svg' %}">

@@ -2,6 +2,7 @@ import random
 import string
 import os
 from django.utils.text import slugify
+import re
 
 
 def get_filename(path):
@@ -67,3 +68,12 @@ def unique_id_referrer_generator(instance):
     if qs_exists:
         return unique_slug_generator(instance)
     return new_id_referrer
+
+
+def calculate_reading_time(blog_post, words_per_minute=250):
+    words = re.findall(r'\b\w+\b', blog_post)
+    word_count = len(words)
+
+    minutes = word_count / words_per_minute
+
+    return word_count, minutes

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+<main class="main no-main">
+    <div class="container-fluid courses2-div-house home-nav-bg-green p-0 c">
+        <div class="grid-container-courses2-div">
+            <div class="partition courses-list-div-holder course-top-padding home-nav-bg-white desktop b">
+                <div class="container-fluid courses-list-div p-0 a">
+                    <h2>Courses</h2>
+                    <ul>
+                        {% for obj in related_courses %}
+                        <li class="#">
+                            <a href="{% url 'course:course_detail' pk=obj.pk slug=obj.slug %}">{{ obj.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="partition courses-container-div  c-overview-div course-top-padding  b">
+                <div class="container-fluid courses-overview-div p-0 a">
+                    <!-- Continue where you left off -->
+                    <div class="container-fluid last-lesson-div l-lesson-div2 home-nav-bg-white c">
+                        <div class="grid-container-last-lesson next-lesson-div p-0">
+                            <div>
+                                <h6>
+                                    {{ topic.title }}
+                                </h6>
+                                <p class="mb-0">
+                                    3 mins
+                                </p>
+                            </div>
+
+                            <div class="continue-btn-div start desktop b">
+                                <p class="mb-0">
+                                    <a href="lesson.html">
+                                        <button class="ybtn">
+                                            Continue Learning
+                                            <img src="{% static 'icons/arrow_right.svg' %}">
+                                        </button>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Lesson Details -->
+                        {% if topic.image %}
+                        <img src="{{ topic.image.url }}" class="img-fluid lesson-img">
+                        {% endif %}
+                        <div class="container-fluid lesson-details-div p-0 b">
+                            {% if topic.content_set.first.content_type == 'text' %}
+                            <p>{{ topic.content_set.first.text_content|safe }}</p>
+
+                            {% elif topic.content_set.first.content_type == 'video' %}
+                            <iframe width="560" height="315" src="{{ topic.content_set.first.video_url }}"
+                                frameborder="0" allowfullscreen></iframe>
+
+                            {% elif topic.content_set.first.content_type == 'file' %}
+                            <a href="{{ topic.content_set.first.file_upload.url }}" download>Download File</a>
+                            {% endif %}
+
+                        </div>
+
+                        <!-- Next or Previous button -->
+                        <div class="container-fluid next-prev-div p-0 b">
+                            {% if previous_topic %}
+                            <a href="{% url 'course:topic_content' pk=previous_topic.pk %}" class="alignleft">
+                                <div class="prev-div ">
+                                    <h5>
+                                        <img src="{% static 'icons/prev_lesson.svg' %}" class="img-fluid"> &nbsp;
+                                        Previous <span class="desktop">Lesson</span>
+                                    </h5>
+                                    <h6 class="desktop">
+                                        {{ previous_topic.title }}
+                                    </h6>
+                                </div>
+                            </a>
+                            {% endif %}
+
+                            {% if next_topic %}
+                            <a href="{% url 'course:topic_content' pk=next_topic.pk %}" class="alignright">
+                                <div class="prev-div">
+                                    <h5>
+                                        Next <span class="desktop">Lesson</span> &nbsp;
+                                        <img src="{% static 'icons/next_lesson.svg' %}" class="img-fluid">
+                                    </h5>
+                                    <h6 class="desktop">
+                                        {{ next_topic.title }}
+                                    </h6>
+                                </div>
+                            </a>
+                            {% endif %}
+                            <div class="clr"></div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+
+
+
+
+{% endblock %}
+
+
+<main role="main">
+
+    <h1>{{ topic.title }} - Topic Detail</h1>
+
+    {% if topic.content_set.first.content_type == 'text' %}
+    <p>{{ topic.content_set.first.text_content }}</p>
+    {% elif topic.content_set.first.content_type == 'video' %}
+    <iframe width="560" height="315" src="{{ topic.content_set.first.video_url }}" frameborder="0"
+        allowfullscreen></iframe>
+    {% elif topic.content_set.first.content_type == 'file' %}
+    <a href="{{ topic.content_set.first.file_upload.url }}" download>Download File</a>
+    {% endif %}
+
+    <form method="post" action="{% url 'students:confirm_completion' topic.id %}">
+        {% csrf_token %}
+        <button type="submit">Confirm Completion</button>
+    </form>
+
+
+    <div>
+        {% if previous_topic %}
+        <a href="{% url 'course:topic_content' pk=previous_topic.pk %}">Previous</a>
+        {% endif %}
+
+        {% if next_topic %}
+        <a href="{% url 'course:topic_content' pk=next_topic.pk %}">Next</a>
+        {% endif %}
+    </div>
+
+</main>

@@ -5,6 +5,10 @@ from django.urls import reverse
 from django.conf import settings
 import random
 from django.db.models import Q
+from django.db.models.signals import pre_save, post_save
+from brillianzhub.utils import unique_slug_generator
+from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 
 
 class CourseQuerySet(models.QuerySet):
@@ -69,6 +73,14 @@ class Course(models.Model):
         return reverse('course:course_detail', kwargs={'slug': self.slug})
 
 
+def post_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(post_pre_save_receiver, sender=Course)
+
+
 class Module(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -107,7 +119,7 @@ class Content(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     content_type = models.CharField(max_length=50, choices=[(
         'text', 'Text'), ('video', 'Video'), ('file', 'File')])
-    text_content = models.TextField(blank=True, null=True)
+    text_content = RichTextUploadingField()
     video_url = models.URLField(blank=True, null=True)
     file_upload = models.FileField(
         upload_to='content_files/', blank=True, null=True)

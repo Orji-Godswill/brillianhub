@@ -18,23 +18,32 @@ class CourseDetailView(DetailView):
     template_name = "courses/course_details.html"
     context_object_name = 'course'
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['modules'] = self.object.module_set.all()
+
+        related_courses = Course.objects.all()
+
+        context['related_courses'] = related_courses
 
         return context
 
 
 class TopicDetailView(DetailView):
     model = Topic
-    template_name = 'courses/topic_detail.html'
+    template_name = 'courses/topic_content.html'
     context_object_name = 'topic'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         topic = self.object
+
         context['next_topic'] = topic.get_next_topic()
         context['previous_topic'] = topic.get_previous_topic()
+
+        related_courses = Course.objects.all()
+
+        context['related_courses'] = related_courses
 
         return context
 
