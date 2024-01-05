@@ -39,6 +39,7 @@ urlpatterns = [
     path('courses/', include("course.urls")),
     path('students/', include('students.urls')),
     path('book_appointment/', include("consult.urls")),
+    path('quiz/', include("quiz.urls")),
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('contact/', views.contact_view, name="contact"),

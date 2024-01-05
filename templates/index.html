@@ -146,20 +146,23 @@
     <div class="container-fluid browse-hub-div div-padding bottom-margin home-nav-bg-white">
         <h2 class="heading">Browse hub</h2>
         <div class="grid-container-browse-hub-div">
+
+            {% for course in course %}
             <div class="course-div a">
+                {% if course.image %}
                 <div class="container-fluid course-img-holder p-0 m-0">
-                    <img src="{% static 'images/meeting.jpg' %}" class="img-fluid course-img">
+                    <img src="{{ course.image.url }}" class="img-fluid course-img">
                 </div>
-                <div class="container-fluid course-details c">
-                    <h5>Personal Financial Management</h5>
+                {% endif %}
+                <div class="container-fluid course-details c"><br />
+                    <h5>{{ course.title }}</h5>
                     <p class="course-description">
-                        Gain knowledge and practical skills in managing your finances, from budgeting & saving to
-                        debt management and long-term financial planning.
+                        {{ course.description }}
                     </p>
 
                     <h6 class="alignleft">
                         <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
-                        5 Modules
+                        {{ course.get_module_count_for_course }} Modules
                     </h6>
 
                     <h6 class="alignright">
@@ -168,7 +171,7 @@
                     </h6>
                     <div class="clr"></div>
                     <p class="text-end">
-                        <a href="">
+                        <a href="{% url 'course:course_detail' slug=course.slug pk=course.pk %}">
                             <button class="out-fill-btn">
                                 Learn Here
                                 <img src="{% static 'icons/arrow_right.svg' %}">
@@ -177,70 +180,8 @@
                     </p>
                 </div>
             </div>
+            {% endfor %}
 
-            <div class="course-div a">
-                <div class="container-fluid course-img-holder p-0 m-0">
-                    <img src="{% static 'images/forex.jpg' %}" class="img-fluid course-img">
-                </div>
-                <div class="container-fluid course-details c">
-                    <h5>Stock Investment</h5>
-                    <p class="course-description">
-                        Explore the dynamics of the stock market and learn how to analyze stocks, understand market
-                        trends, & make informed investment decisions.
-                    </p>
-
-                    <h6 class="alignleft">
-                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
-                        5 Modules
-                    </h6>
-
-                    <h6 class="alignright">
-                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
-                        8hrs 40mins
-                    </h6>
-                    <div class="clr"></div>
-                    <p class="text-end">
-                        <a href="">
-                            <button class="out-fill-btn">
-                                Learn Here
-                                <img src="{% static 'icons/arrow_right.svg' %}">
-                            </button>
-                        </a>
-                    </p>
-                </div>
-            </div>
-
-            <div class="course-div a">
-                <div class="container-fluid course-img-holder p-0 m-0">
-                    <img src="{% static 'images/hotel.jpg' %}" class="img-fluid course-img">
-                </div>
-                <div class="container-fluid course-details c">
-                    <h5>Real Estate Investment</h5>
-                    <p class="course-description">
-                        Delve into the world of real estate investment, understanding property valuation, market
-                        analysis, and investment strategies.
-                    </p>
-
-                    <h6 class="alignleft">
-                        <img src="{% static 'icons/modules.svg' %}" class="img-fluid">
-                        5 Modules
-                    </h6>
-
-                    <h6 class="alignright">
-                        <img src="{% static 'icons/clock.svg' %}" class="img-fluid">
-                        8hrs 40mins
-                    </h6>
-                    <div class="clr"></div>
-                    <p class="text-end">
-                        <a href="">
-                            <button class="out-fill-btn">
-                                Learn Here
-                                <img src="{% static 'icons/arrow_right.svg' %}">
-                            </button>
-                        </a>
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
 

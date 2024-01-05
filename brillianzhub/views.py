@@ -4,14 +4,16 @@ from django.views.generic import ListView
 from accounts.forms import ContactForm
 from accounts.models import Contact
 from django.core.mail import send_mail, BadHeaderError
+from course.models import Course
 
 
 def index_view(request):
+    course = Course.objects.all()
     # objects_designs = Design.objects.all().published().filter(featured=True).reverse()[:20]
     # objects_plots  = Plot.objects.all().published().filter(featured=True).reverse()[:6]
 
     context = {
-        # 'objects_designs': objects_designs,
+        'course': course,
         # 'objects_plots': objects_plots
     }
     return render(request, 'index.html', context)

@@ -1,3 +1,4 @@
+from typing import Any
 from django.views.generic import ListView, DetailView
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
@@ -26,6 +27,11 @@ class CourseDetailView(DetailView):
 
         context['related_courses'] = related_courses
 
+        course_title = self.object
+        total_count = course_title.get_topic_count_for_course()
+
+        context['total_count'] = total_count
+
         return context
 
 
@@ -42,6 +48,10 @@ class TopicDetailView(DetailView):
         context['previous_topic'] = topic.get_previous_topic()
 
         related_courses = Course.objects.all()
+
+        module = topic.module
+
+        context['module'] = module
 
         context['related_courses'] = related_courses
 

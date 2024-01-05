@@ -97,6 +97,18 @@
                                     </h6>
                                 </div>
                             </a>
+                            {% else %}
+                            <a href="{% url 'quiz:test' pk=module.pk %}" class="alignright">
+                                <div class="prev-div">
+                                    <h5>
+                                        Go to <span class="desktop">Test</span> &nbsp;
+                                        <img src="{% static 'icons/next_lesson.svg' %}" class="img-fluid">
+                                    </h5>
+                                    <h6 class="desktop">
+                                        {{ module.title }}
+                                    </h6>
+                                </div>
+                            </a>
                             {% endif %}
                             <div class="clr"></div>
                         </div>

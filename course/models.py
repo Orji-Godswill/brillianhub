@@ -72,6 +72,12 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse('course:course_detail', kwargs={'slug': self.slug})
 
+    def get_topic_count_for_course(self):
+        return self.topic_set.count()
+
+    def get_module_count_for_course(self):
+        return self.module_set.count()
+
 
 def post_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
