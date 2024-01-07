@@ -1,66 +1,74 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block header %}
+{% include 'base/navbar.html' %}
+{% endblock %}
+
 {% block content %}
 
+<main class="main no-main">
+    <div class="container-fluid home-nav-bg-green contact-div nav-clearance c">
+        <div class="grid-container-contact-div div-padding">
+            <div class="grid-item-contact-div signup-bg first-div-deatils img-holder b">
+                <div class="container-fluid signup-holder">
+                    <h2>Create your <br>account here</h2>
+                </div>
+            </div>
 
-<!-- {% include 'snippets/header.html' %} -->
-<!-- bradcam_area  -->
-<div class="bradcam_area bradcam_bg_1">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="bradcam_text text-center">
-                    <h3>Create Account</h3>
+            <div class="grid-item-contact-div form-holder-div home-nav-bg-green p-0 b">
+                <div class="container-fluid form-details c">
+
+
+
+                    <form action="" method="post">{% csrf_token %}
+                        <div class="container-fluid p-0">
+                            <div class="row style-form form-mb">
+                                <div class="col-12">
+                                    <label>Email address<sup>*</sup></label>
+                                    <input type="text" class="form-control" name="email_name"
+                                        placeholder="Enter a valid email address" aria-label="Email address">
+                                </div>
+                            </div>
+
+                            <div class="style-form password-holder form-mb">
+                                <label class="form-label">Password<sup>*</sup></label>
+                                <input type="password" name="password" autocomplete="current-password"
+                                    class="password-input" id="id_password">
+                                <i class="fa fa-eye" id="togglePassword"></i>
+                            </div>
+
+                            <div class="style-form password-holder form-mb">
+                                <label class="form-label">Confirm Password<sup>*</sup></label>
+                                <input type="password" name="password" autocomplete="current-password"
+                                    class="password-input" id="id_password">
+                                <i class="fa fa-eye" id="togglePassword"></i>
+                            </div>
+
+                            <p class="text-end mb-0">
+                                <button type="submit" class="filled-btn-lg ">
+                                    Create Account
+                                </button>
+                            </p>
+                    </form>
+
+
+                </div>
+
+                <div class="container-fluid extra-signup-detail p-0">
+                    <h5>
+                        Do you have an account?
+                        <a href="signin.html">
+                            Sign in here
+                        </a>
+                    </h5>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--/ bradcam_area  -->
-
-<!-- ================ contact section start ================= -->
-<section class="contact-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="contact-title">Create account</h2>
-            </div>
-            <div class="col-lg-8">
 
 
-                <form method='POST' action="">{% csrf_token %}
-                    {{ user_form.as_p }}
-                    <br><button type="submit" class="btn btn-primary">Create my account</button>
-                </form>
-
-            </div><br>
-            <div class="col-lg-3 offset-lg-1" style="padding-top: 50px;">
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-home"></i></span>
-                    <div class="media-body">
-                        <h3>Head Office</h3>
-                        <p>Owerri, Nigeria.</p>
-                    </div>
-                </div>
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-                    <div class="media-body">
-                        <h3>Official Working Days</h3>
-                        <p>Mon to Fri 9am to 4pm</p>
-                    </div>
-                </div>
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-email"></i></span>
-                    <div class="media-body">
-                        <h3>+2348060473170</h3>
-                        <p>Send us whatsapp message anytime!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ================ contact section end ================= -->
+</main>
 
 
 {% endblock %}

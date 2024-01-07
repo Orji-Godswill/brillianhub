@@ -1,29 +1,57 @@
-# quiz/views.py
+from typing import Any
+from .models import Question
+from django.shortcuts import render, redirect
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Question, Choice
 import random
 from django.http import JsonResponse
 import json
-from course.models import Module
+from course.models import Module, Topic, Course, Content
+from django.core.serializers import serialize
+from django.views.generic import DetailView, ListView
 
 
-def random_question(request, pk=None):
-    # Get a random question
+class QuestionDetailView(DetailView):
+    model = Question
+    template_name = 'quiz/question_content.html'
+    context_object_name = 'question'
 
-    module = get_object_or_404(Module, pk=pk)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(pk=None, **kwargs)
+        question = self.object
 
-    question = random.choice(Question.objects.filter(module__id=module.id))
-    next_question = question.get_next_question()
+        count = 0
+        next_question = question.get_next_question()
+        context['next_question'] = next_question
+
+        if next_question:
+            print(f"Next Question: {next_question}")
+        else:
+            print("No more questions")
+
+        course = Course.objects.all()
+        context['course'] = course
+        module = question.module
+        context['module'] = module
+
+        return context
+
+
+def quiz_complete(request):
+
+    result = 0
 
     context = {
-        'question': question,
-        'next_question': next_question
+
     }
 
-    return render(request, 'quiz/quiz_list.html', context)
+    return render(request, 'quiz/quiz_complete.html', context)
 
 
 def check_answer(request):
+    pass_test = 0
+    failed_test = 0
+
     if request.method == 'POST':
         select_choice = request.POST.get('selectChoice', None)
         question_id = request.POST.get('question_id')
@@ -37,8 +65,21 @@ def check_answer(request):
 
         if str(select_choice) == str(is_correct):
             is_correct = True
+            pass_test += 1
+            print(f"Pass = {pass_test}")
         else:
             is_correct = False
+            failed_test += 1
+            print(f"Failed = {failed_test}")
 
         return JsonResponse({'selectChoice': select_choice, 'is_correct': is_correct})
     return JsonResponse({'error': 'Invalid request'})
+
+
+def calculate_time(request, pk):
+
+    context = {
+
+    }
+
+    return render(request, '', context)

@@ -9,8 +9,6 @@ from course.models import Course
 
 def index_view(request):
     course = Course.objects.all()
-    # objects_designs = Design.objects.all().published().filter(featured=True).reverse()[:20]
-    # objects_plots  = Plot.objects.all().published().filter(featured=True).reverse()[:6]
 
     context = {
         'course': course,
@@ -25,17 +23,15 @@ def contact_view(request):
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            sender = form.cleaned_data['sender']
-            phone = form.cleaned_data['phone']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email_address = form.cleaned_data['email_address']
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
-            cc_myself = form.cleaned_data['cc_myself']
             recipients = ['brillianzhub@gmail.com']
-            if cc_myself:
-                recipients.append(sender)
+
             try:
-                send_mail(name, phone, message,  recipients)
+                send_mail(subject, message, email_address,  recipients)
                 form.save()
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')

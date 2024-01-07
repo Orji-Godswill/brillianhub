@@ -142,16 +142,15 @@ class GroupExtend(models.Model):
 
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email_address = models.EmailField()
     subject = models.CharField(max_length=50)
     message = models.TextField()
-    sender = models.EmailField()
-    phone = models.CharField(max_length=20)
-    cc_myself = models.BooleanField(default=False)
     time = models.DateTimeField(auto_now_add=True, db_index=True)
 
     def __str__(self):
-        return 'Message for {}'.format(self.sender)
+        return 'Message from {}'.format(self.email_address)
 
 
 class EmailActivationQuerySet(models.query.QuerySet):

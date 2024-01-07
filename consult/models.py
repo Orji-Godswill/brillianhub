@@ -3,15 +3,15 @@ from django.db import models
 
 class Appointment(models.Model):
     NUMBER_CHOICES = (
-        ('1', 'Personal Consultation'),
-        ('2', 'Two'),
-        ('4', 'Three'),
-        ('more than 3', 'More than 3'),
+        ('1', 'Stock Investment'),
+        ('2', 'Real Estate'),
+        ('4', 'Personal Finance'),
+        ('more than 3', 'Others'),
     )
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     email = models.EmailField()
-    number_team_members = models.CharField(
+    appointment_type = models.CharField(
         max_length=15, choices=NUMBER_CHOICES, default='1')
     appointment_date_time = models.DateTimeField()
     message = models.CharField(max_length=100)

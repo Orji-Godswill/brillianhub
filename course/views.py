@@ -6,6 +6,7 @@ from django.http import Http404
 from django.db.models import Count
 from .models import Course, Module, Topic, Content
 from django.views.generic.base import TemplateResponseMixin, View
+from quiz.models import Question
 
 
 class CourseListView(ListView):
@@ -51,6 +52,9 @@ class TopicDetailView(DetailView):
 
         module = topic.module
 
+        question = Question.objects.filter(module__id=module.id).first()
+
+        context['question'] = question
         context['module'] = module
 
         context['related_courses'] = related_courses

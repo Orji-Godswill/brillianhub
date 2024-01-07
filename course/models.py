@@ -90,10 +90,22 @@ pre_save.connect(post_pre_save_receiver, sender=Course)
 class Module(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, blank=True, null=True, unique=True)
     order = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return f"{self.course.title} - Module {self.order}: {self.title}"
+
+    def get_all_questions(self):
+        return self.questions.all()
+
+
+def post_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(post_pre_save_receiver, sender=Module)
 
 
 class Topic(models.Model):

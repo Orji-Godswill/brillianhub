@@ -98,7 +98,7 @@
                                 </div>
                             </a>
                             {% else %}
-                            <a href="{% url 'quiz:test' pk=module.pk %}" class="alignright">
+                            <a href="{% url 'quiz:question_content' pk=question.pk %}" class="alignright">
                                 <div class="prev-div">
                                     <h5>
                                         Go to <span class="desktop">Test</span> &nbsp;
@@ -121,12 +121,7 @@
         </div>
     </div>
 
-
 </main>
-
-
-
-
 
 {% endblock %}
 
