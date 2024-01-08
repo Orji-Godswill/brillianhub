@@ -94,10 +94,12 @@ class Module(models.Model):
     order = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.course.title} - Module {self.order}: {self.title}"
+        return f"Module {self.order}: {self.title}"
 
-    def get_all_questions(self):
-        return self.questions.all()
+    def get_next_module(self):
+        next_module = Module.objects.filter(
+            course=self.course, order__gt=self.order).order_by('order').first()
+        return next_module
 
 
 def post_pre_save_receiver(sender, instance, *args, **kwargs):

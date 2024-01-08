@@ -7,6 +7,18 @@ from django.db.models import Count
 from .models import Course, Module, Topic, Content
 from django.views.generic.base import TemplateResponseMixin, View
 from quiz.models import Question
+from quiz.views import quiz_score
+from bs4 import BeautifulSoup
+
+
+def count_words(text):
+    soup = BeautifulSoup(text, 'html.parser')
+    plain_text = soup.get_text()
+
+    words = plain_text.split()
+    num_words = len(words)
+
+    return num_words
 
 
 class CourseListView(ListView):
@@ -43,19 +55,27 @@ class TopicDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         topic = self.object
+        module = topic.module
+        content = get_object_or_404(Content, topic__id=topic.id)
+        topic_duration = round(count_words(content.text_content)/200)
+
+        if len(quiz_score) > 0:
+            quiz_score.clear()
 
         context['next_topic'] = topic.get_next_topic()
         context['previous_topic'] = topic.get_previous_topic()
 
         related_courses = Course.objects.all()
-
-        module = topic.module
+        context['next_module'] = module.get_next_module()
 
         question = Question.objects.filter(module__id=module.id).first()
 
         context['question'] = question
         context['module'] = module
+
+        context['topic_duration'] = topic_duration
 
         context['related_courses'] = related_courses
 

@@ -73,14 +73,12 @@
                                 <div class="grid-container-progress2 p-0 b mb-0">
                                     <div class="progress " role="progressbar" aria-label="Success example"
                                         aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar bg-dark-blue" style="width: 10%"></div>
+                                        <div class="progress-bar bg-dark-blue" id="myProgressBar" style="width: 10%">
+                                        </div>
                                     </div>
-                                    <span class="" id="number_qs"> </span>
+                                    <span class="" id="number_qs"> {{ question.order }} / 10</span>
                                 </div>
                             </div>
-
-
-
 
 
                             <div class="quiz-div b">
@@ -149,10 +147,11 @@
                             <p class="text-end mb-0">
                                 {% if next_question %}
                                 <a href="{% url 'quiz:question_content' pk=next_question.pk %}">
-                                    <button onclick="increaseCount()" type="submit" class="filled-btn-lg ">
+                                    <button type="submit" class="filled-btn-lg ">
                                         Next Question
                                     </button>
                                 </a>
+
                                 {% else %}
                                 <a href="{% url 'quiz:quiz_complete' %}">
                                     <button type="submit" class="filled-btn-lg ">
@@ -235,4 +234,67 @@
 
 </script>
 
+
 {% endblock %}
+
+<script>
+    $(document).ready(function () {
+        // Initial progress value
+        var progressValue = 0;
+
+        // Function to update progress bar
+        function updateProgressBar() {
+            $('#progress').text(progressValue.toFixed(2) + '%');
+            // Add your styling or logic to visually update the progress bar
+        }
+
+        // Function to load the next question
+        function loadNextQuestion() {
+            $.ajax({
+                type: 'GET',
+                url: '{% url "quiz:question_content" pk=next_question.pk %}',
+                dataType: 'json',
+                success: function (data) {
+                    // Update the content with the next question data
+                    console.log(data.content)
+                    // $('#question-container').html(data.question_content);
+                    // Increment progress value
+                    progressValue += 10;
+                    updateProgressBar();
+                },
+                error: function (error) {
+                    console.log('Error loading next question:', error);
+                }
+            });
+        }
+
+        // Event handler for the "Next Question" button
+        $('#nextQuestionBtn').click(function (e) {
+            e.preventDefault();  // Prevent the default link behavior
+            loadNextQuestion();   // Load the next question
+        });
+    });
+</script>
+
+
+<a href="{% url 'quiz:question_content' pk=next_question.pk %}">
+    <button type="submit" class="filled-btn-lg ">
+        Next Question
+    </button>
+</a>
+<a href="#" id="nextQuestionBtn" class="next-question-btn">
+    <button type="button" class="filled-btn-lg">
+        Next Question
+    </button>
+</a>
+<script>
+    function increaseProgressBar() {
+        var progressBar = document.getElementById('myProgressBar');
+        var currentWidth = parseInt(progressBar.style.width) || 0;
+
+        // Increase width by 10%
+        var newWidth = Math.min(currentWidth + 10, 100);
+        progressBar.style.width = newWidth + '%';
+        progressBar.innerText = newWidth + '%';
+    }
+</script>

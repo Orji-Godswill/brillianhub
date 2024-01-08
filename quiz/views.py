@@ -24,11 +24,6 @@ class QuestionDetailView(DetailView):
         next_question = question.get_next_question()
         context['next_question'] = next_question
 
-        if next_question:
-            print(f"Next Question: {next_question}")
-        else:
-            print("No more questions")
-
         course = Course.objects.all()
         context['course'] = course
         module = question.module
@@ -37,20 +32,40 @@ class QuestionDetailView(DetailView):
         return context
 
 
-def quiz_complete(request):
+class QuestionsDetailView(DetailView):
+    model = Question
+    template_name = 'quiz/question_content.html'
+    context_object_name = 'question'
 
-    result = 0
+    def get(self, request, *args, **kwargs):
+        question = self.get_object()
 
-    context = {
+        count = 0
+        next_question = question.get_next_question()
 
-    }
+        course = Course.objects.all()
 
-    return render(request, 'quiz/quiz_complete.html', context)
+        # Create a dictionary to serialize as JSON
+        json_response = {
+            'next_question': {
+                'id': next_question.id,
+                # 'content': next_question.content,
+                # Add other fields as needed
+            },
+            'course': [{'id': c.id, 'title': c.title} for c in course],
+            # Adjust fields accordingly
+            'module': {'id': question.module.id, 'title': question.module.title},
+        }
+
+        return JsonResponse(json_response)
+
+
+quiz_score = {}
 
 
 def check_answer(request):
-    pass_test = 0
-    failed_test = 0
+
+    user = request.user
 
     if request.method == 'POST':
         select_choice = request.POST.get('selectChoice', None)
@@ -65,15 +80,29 @@ def check_answer(request):
 
         if str(select_choice) == str(is_correct):
             is_correct = True
-            pass_test += 1
-            print(f"Pass = {pass_test}")
+
+            if user not in quiz_score:
+                quiz_score[user] = 0
+            quiz_score[user] += 1
+
         else:
             is_correct = False
-            failed_test += 1
-            print(f"Failed = {failed_test}")
 
         return JsonResponse({'selectChoice': select_choice, 'is_correct': is_correct})
     return JsonResponse({'error': 'Invalid request'})
+
+
+def quiz_complete(request):
+
+    user_quiz_score = 0
+    if request.user in quiz_score:
+        user_quiz_score = quiz_score[request.user] * 20
+
+    context = {
+        'user_quiz_score': user_quiz_score,
+    }
+
+    return render(request, 'quiz/quiz_complete.html', context)
 
 
 def calculate_time(request, pk):

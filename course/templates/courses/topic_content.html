@@ -32,10 +32,10 @@
                         <div class="grid-container-last-lesson next-lesson-div p-0">
                             <div>
                                 <h6>
-                                    {{ topic.title }}
+                                    {{ module }} - {{ topic.title }}
                                 </h6>
                                 <p class="mb-0">
-                                    3 mins
+                                    {{ topic_duration }} mins
                                 </p>
                             </div>
 
@@ -124,35 +124,3 @@
 </main>
 
 {% endblock %}
-
-
-<main role="main">
-
-    <h1>{{ topic.title }} - Topic Detail</h1>
-
-    {% if topic.content_set.first.content_type == 'text' %}
-    <p>{{ topic.content_set.first.text_content }}</p>
-    {% elif topic.content_set.first.content_type == 'video' %}
-    <iframe width="560" height="315" src="{{ topic.content_set.first.video_url }}" frameborder="0"
-        allowfullscreen></iframe>
-    {% elif topic.content_set.first.content_type == 'file' %}
-    <a href="{{ topic.content_set.first.file_upload.url }}" download>Download File</a>
-    {% endif %}
-
-    <form method="post" action="{% url 'students:confirm_completion' topic.id %}">
-        {% csrf_token %}
-        <button type="submit">Confirm Completion</button>
-    </form>
-
-
-    <div>
-        {% if previous_topic %}
-        <a href="{% url 'course:topic_content' pk=previous_topic.pk %}">Previous</a>
-        {% endif %}
-
-        {% if next_topic %}
-        <a href="{% url 'course:topic_content' pk=next_topic.pk %}">Next</a>
-        {% endif %}
-    </div>
-
-</main>

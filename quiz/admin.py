@@ -8,6 +8,7 @@ class ChoiceInline(admin.TabularInline):
 
 
 class QuestionAdmin(admin.ModelAdmin):
+    list_display = ['course', 'module', 'order']
     inlines = [ChoiceInline]
 
 
