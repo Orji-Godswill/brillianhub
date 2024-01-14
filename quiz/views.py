@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from typing import Any
 from .models import Question
 from django.shortcuts import render, redirect
@@ -30,6 +31,10 @@ class QuestionDetailView(DetailView):
         context['module'] = module
 
         return context
+
+    def update_progress_bar(request):
+        current_value = int(request.POST.get('current_value', 0))
+        print(current_value)
 
 
 class QuestionsDetailView(DetailView):
@@ -96,7 +101,7 @@ def quiz_complete(request):
 
     user_quiz_score = 0
     if request.user in quiz_score:
-        user_quiz_score = quiz_score[request.user] * 20
+        user_quiz_score = quiz_score[request.user] * 10
 
     context = {
         'user_quiz_score': user_quiz_score,

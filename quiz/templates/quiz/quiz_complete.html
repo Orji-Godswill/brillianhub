@@ -90,7 +90,7 @@
                                         Way to go! You’re doing a <br class="phone">great job
                                     </p>
 
-                                    <a href="dashboard-modules.html">
+                                    <a href="{% url 'student:completed_module' pk=module.pk %}">
                                         <button class="filled-btn">
                                             Complete Module
                                         </button>
@@ -100,7 +100,7 @@
                             {% else %}
                             <div class="try-again-div p-0 b">
                                 <center>
-                                    <h2>Try Again</h2><br />
+                                    <h2>Quiz Complete!</h2><br />
                                     <h2>Score: {{ user_quiz_score }}%</h2><br />
                                     <p>
                                         You didn't reach the pass mark of 70%. Would you like to retry the <br
@@ -109,13 +109,12 @@
 
                                     <a href="#">
                                         <button class="out-fill-btn btnS">
-                                            Close Quiz
+                                            Retry
                                         </button>
                                     </a>
-
                                     <a href="#">
                                         <button class="filled-btn">
-                                            Retry
+                                            Continue Learning
                                         </button>
                                     </a>
                                 </center>

@@ -8,7 +8,7 @@ from django.db.models import Count
 
 
 def blog_posts_view(request, tag_slug=None):
-    post = Blog.objects.all().published()
+    post = Blog.objects.all().published()[:3]
     category = Category.objects.all()
 
     tag = None

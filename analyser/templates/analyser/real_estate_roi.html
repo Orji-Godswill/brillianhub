@@ -17,7 +17,7 @@
 
             <div class="form-holder-div2 disclaimer-div-holder c">
                 <div class="container-fluid disclaimer-div disclaimer-div1 c">
-                    <h5>Compound Savings Calculator</h5>
+                    <h5>Return on Investment on Real Estate Calculator</h5>
                     <p>
                         A compound monthly savings calculator helps individuals plan and visualize their savings growth
                         over time.
@@ -100,10 +100,10 @@
 
                         <p class="last-p">
                             After using the calculator to assess rates and returns, we recommend booking a consultation
-                            with Brillianzhub's team of financial advisor for a comprehensive and detailed discussion
-                            tailored to your specific investment
+                            with us for a comprehensive and detailed discussion tailored to your specific investment
                             needs.
                         </p>
+
                         <a href="{% url 'consult:book_appointment' %}">
                             <button class="filled-btn-lg">Book Consultation</button>
                         </a>
@@ -133,47 +133,6 @@
 
 
 </main>
-
-
-<script>
-    $(document).ready(function () {
-        $('#form-container').on('submit', 'form', function (event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            var formData = $(this).serialize();
-
-            var response_show = document.getElementById("response_container");
-
-            $.ajax({
-                type: 'POST',
-                url: '{% url "analyser:savings_calculator" %}',
-                data: formData,
-                success: function (response) {
-                    if (response.success) {
-                        // Display the result in the result-container
-                        // $('#result-container').html('<p>Result: ' + response.result + '</p>');
-
-                        document.getElementById("initial_deposit").value = response.savings;
-                        document.getElementById("total_interest_paid").value = response.profit;
-                        document.getElementById("total_return").value = response.result;
-
-                        // document.getElementById("earnings-div2").style.display = "block";
-
-                        response_show.scrollIntoView({ behavior: 'smooth' });
-
-                    } else if (response.errors) {
-                        // Handle form validation errors (e.g., display error messages)
-                        alert('Form submission failed. Please correct the errors.');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    // Handle other Ajax errors
-                    alert('An error occurred while submitting the form.');
-                }
-            });
-        });
-    });
-</script>
 
 
 {% endblock %}

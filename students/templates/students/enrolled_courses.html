@@ -8,20 +8,118 @@
 
 
 {% block content %}
-
-<main role="main"> <br /><br /><br /><br />
-    <h1>Enrolled Courses for {{ student }}</h1>
-
-    <ul>
-        {% for course in courses %}
-        <li><a href="{% url 'students:percentage_completion' course.id %}">{{ course.title }}</a></li>
-        {% endfor %}
-    </ul>
-
+<main class="main no-main">
+    <div class="container-fluid courses2-div-house home-nav-bg-green p-0 c">
+        <div class="grid-container-courses3-div">
+            <div class="partition courses-list-div-holder course-top-padding home-nav-bg-white desktop b">
+                <div class="container-fluid courses-list-div p-0 a">
+                    <h2>Investments</h2>
+                    <div class="accordion accordion-flushe" id="accordionFlushExample">
+                        <!-- Repeat this accordion-item div if you have other category that have other courses in it, else use the list -->
 
 
+                        <ul class="accordion-ul">
+                            <li>
+                                <a href="dashboard-investments.html">Real Estate Investments</a>
+                            </li>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                        My Portfolio
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse mb-0 collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <a class="dropdown-item" href="dashboard-create-portfolio.html">
+                                            Create Portfolio
+                                        </a>
+
+                                        <a class="dropdown-item" href="dashboard-portfolio.html">
+                                            View Portfolio
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <li>
+                                <a href="dashboard-referrals.html">Referrals</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="partition courses-container-div course-top-padding b">
+                <div class="container-fluid courses-overview-div referral-div alt-div a">
+                    <h4 class="ref-mb">Referral Link</h4>
+
+                    <!-- Referral Link -->
+                    <div class="container-fluid referral-link-div home-nav-bg-white b">
+                        <h5>Your referral link</h5>
+                        <div class="p-0">
+                            <h6 class="alignleft" id="referral-link">
+                                https://www.reddit.com/r/starcitizen/comments/x96r4p/yournameappearshere/
+                            </h6>
+                            <h6 class="alignright" onclick="copyReferralLink()" title="Copy to clipboard">
+                                <!-- <img src="icons/content_copy.svg"> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20"
+                                    fill="none">
+                                    <path
+                                        d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V5C0 4.71667 0.0958333 4.47917 0.2875 4.2875C0.479167 4.09583 0.716667 4 1 4C1.28333 4 1.52083 4.09583 1.7125 4.2875C1.90417 4.47917 2 4.71667 2 5V18H12C12.2833 18 12.5208 18.0958 12.7125 18.2875C12.9042 18.4792 13 18.7167 13 19C13 19.2833 12.9042 19.5208 12.7125 19.7125C12.5208 19.9042 12.2833 20 12 20H2Z"
+                                        fill="#696A73" />
+                                </svg>
+                                <span class="clip-icon" id="clip-icon">Copied &nbsp;</span>
+                            </h6>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+
+                    <!-- Referral List -->
+                    <h4>Your Courses</h4>
+                    <p class="ref-mb">
+                        You can withdraw a minimum of ₦5,000. Click the withdraw button to make your withdrawals.
+                    </p>
+
+                    <!-- Table -->
+                    <div class="referral-table">
+                        <table class="">
+                            <thead>
+                                <tr class="th-heading">
+                                    <th scope="colt">Course Name</th>
+                                    <th scope="colt">Completion</th>
+                                    <th scope="colt">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user, course_data in result.items %}
+                                {% for course_title, data in course_data.items %}
+                                <tr>
+                                    <td>{{ course_title }}</td>
+                                    <td>{{ data.percentage_completion }}%</td>
+                                    <td><a href="#">Continue...</a></td>
+                                </tr>
+                                {% endfor %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-end mb-0">
+                        <a href="{% url 'course:course_list' %}">
+                            <button class="filled-btn-lg" data-bs-toggle="modal" data-bs-target="#unitsModal">
+                                View more courses
+                            </button>
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
-
 
 {% endblock %}

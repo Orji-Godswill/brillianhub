@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from taggit.models import Tag
 import math
-from . forms import SavingsCalculationForm
+from . forms import SavingsCalculationForm, SavingsTargetForm
 from django.http import JsonResponse
 
 
@@ -50,3 +50,54 @@ def savings_calculator_view(request):
         'form': form,
     }
     return render(request, 'analyser/compound_savings.html', context)
+
+
+def savings_target_calculator(request):
+
+    if request.method == "POST":
+        form = SavingsTargetForm(request.POST)
+
+        if form.is_valid():
+            target_amount = float(request.POST['target_amount'])
+            initial_deposit = float(request.POST['initial_deposit'])
+            duration = float(request.POST['duration'])
+            interest_rate = float(request.POST['interest_rate'])
+            rate_of_return = float(request.POST['rate_of_return'])
+
+            parameter1 = ((interest_rate / 12) * 0.01)
+            parameter2 = (
+                ((1 + parameter1) ** (duration * 12)) - 1)
+
+            result = (target_amount / (parameter2 / parameter1))
+
+            result = round(result, 2)
+            savings = round(initial_deposit + duration * result * 12, 2)
+            profit = round(target_amount - savings, 2)
+
+            context = {
+                'success': True,
+                'result': result,
+                'savings': savings,
+                'profit': profit
+            }
+
+            return JsonResponse(context)
+        else:
+            return JsonResponse({'errors': form.errors}, status=400)
+    else:
+        form = SavingsTargetForm()
+
+    context = {
+        'form': form
+
+    }
+
+    return render(request, 'analyser/savings_target.html', context)
+
+
+def return_on_real_estate_investment(request):
+
+    context = {
+
+    }
+    return render(request, 'analyser/real_estate_roi.html', context)

@@ -62,6 +62,10 @@ class Course(models.Model):
     description = models.TextField()
     image = models.ImageField(
         upload_to=upload_image_path, null=True, blank=True)
+    students = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='courses_joined', blank=True)
+    featured = models.BooleanField(default=False)
+    premium = models.BooleanField(default=False)
 
     objects = CourseManager()
     search = CourseManager()
@@ -87,6 +91,18 @@ def post_pre_save_receiver(sender, instance, *args, **kwargs):
 pre_save.connect(post_pre_save_receiver, sender=Course)
 
 
+class Objective(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    objective = models.TextField(blank=True, null=True)
+    order = models.PositiveBigIntegerField(default=1)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return "{}. {}".format(self.order, self.objective)
+
+
 class Module(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -94,7 +110,7 @@ class Module(models.Model):
     order = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"Module {self.order}: {self.title}"
+        return f"{self.course.title} - Module {self.order}: {self.title}"
 
     def get_next_module(self):
         next_module = Module.objects.filter(

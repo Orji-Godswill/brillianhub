@@ -31,3 +31,23 @@ class SavingsCalculationForm(forms.Form):
         label="How long in years do you plan to save?", initial=5)
     interest_rate = forms.FloatField(label="Interest rate %", initial=5)
     rate_of_return = forms.ChoiceField(choices=return_choices)
+
+
+# Savings Target Calculator Form
+return_frequency = (
+    (1, 'Annual'),
+    (2, 'Biannual'),
+    (4, 'Quarterly'),
+    (12, 'Monthly'),
+    (52, 'Weekly'),
+    (365, 'Daily'),
+)
+
+
+class SavingsTargetForm(forms.Form):
+    target_amount = forms.FloatField(label='Savings Target', initial=5000)
+    initial_deposit = forms.FloatField(label='Initial deposit', initial=1000)
+    duration = forms.IntegerField(
+        label="How long in years do you plan to save?", initial=5)
+    interest_rate = forms.FloatField(label="Interest rate %", initial=5)
+    rate_of_return = forms.ChoiceField(choices=return_frequency)

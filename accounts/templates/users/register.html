@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block content %}
-
 <main class="main no-main">
     <div class="container-fluid home-nav-bg-green contact-div nav-clearance c">
         <div class="grid-container-contact-div div-padding">
@@ -18,8 +17,6 @@
 
             <div class="grid-item-contact-div form-holder-div home-nav-bg-green p-0 b">
                 <div class="container-fluid form-details c">
-
-
 
                     <form action="" method="post">{% csrf_token %}
                         <div class="container-fluid p-0">
@@ -58,7 +55,7 @@
                 <div class="container-fluid extra-signup-detail p-0">
                     <h5>
                         Do you have an account?
-                        <a href="signin.html">
+                        <a href="{% url 'accounts:login' %}">
                             Sign in here
                         </a>
                     </h5>

@@ -219,6 +219,7 @@ CKEDITOR_CONFIGS = {
 
 }
 
+
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = reverse_lazy('accounts:login')
 LOGOUT_URL = reverse_lazy('home')

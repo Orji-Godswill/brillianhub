@@ -11,28 +11,30 @@
         <div class="grid-container-contact-div div-padding">
             <div class="calculator-bg first-div-deatils  img-holder b">
                 <div class="container-fluid signup-holder2">
-                    <h2>Investor’s <br>Calculator</h2>
+                    <h2>Savings Target <br>Calculator</h2>
                 </div>
             </div>
 
             <div class="form-holder-div2 disclaimer-div-holder c">
                 <div class="container-fluid disclaimer-div disclaimer-div1 c">
-                    <h5>Compound Savings Calculator</h5>
+                    <h5>Savings Goal Calculator</h5>
+
                     <p>
-                        A compound monthly savings calculator helps individuals plan and visualize their savings growth
-                        over time.
+                        It is not simply a financial exercise to set savings targets; it's an essential step on the path
+                        toward securing your financial future.
                     </p>
 
                     <p class="disclaimer-p">
-                        By inputting initial savings, interest rate, and contribution frequency, users can see how their
-                        money can grow through compounding. This tool aids in informed decision-making for long-term
-                        financial goals like retirement or education planning.
+                        For your financial journey, it will bring clarity,
+                        discipline, and resilience, which will lead to a stable and prosperous life. Individuals can
+                        take active steps to achieve their goals, while at the same time ensuring that they are
+                        financially healthy through recognition of the importance of setting savings objectives.
                     </p>
                 </div>
 
                 <div id="form-container" class="container-fluid form-details c">
 
-                    {% include 'snippets/compound_savings_form.html' %}
+                    {% include 'snippets/savings_target_calculator.html' %}
 
                 </div>
             </div>
@@ -53,7 +55,8 @@
 
                         <p class="last-p">
                             After using the calculator to assess rates and returns, we recommend booking a consultation
-                            with us for a comprehensive and detailed discussion tailored to your specific investment
+                            with Brillianzhub's team of financial advisor for a comprehensive and detailed discussion
+                            tailored to your specific investment
                             needs.
                         </p>
 
@@ -68,20 +71,20 @@
                 <div class="container-fluid form-details c" style="background: #F3FDFD;">
                     <div class="container-fluid earnings-div p-0">
                         <div class="style-form form-mb">
-                            <label class="form-label">Total Savings</label>
-                            <input type="text" class="form-control" id="initial_deposit" readonly
+                            <label class="form-label">Recommended Monthly Savings</label>
+                            <input type="text" class="form-control" id="monthly_savings" readonly
                                 style="border: 1px solid #050505;">
                         </div>
 
                         <div class="style-form form-mb">
-                            <label class="form-label">Total Interest Paid</label>
-                            <input type="text" class="form-control" id="total_interest_paid" readonly
+                            <label class="form-label">Total Saved</label>
+                            <input type="text" class="form-control" id="my_savings" readonly
                                 style="border: 1px solid #050505;">
                         </div>
 
                         <div class="style-form form-mb">
                             <label class="form-label">Total Return</label>
-                            <input type="text" class="form-control" id="total_return" readonly
+                            <input type="text" class="form-control" id="total_profit" readonly
                                 style="border: 1px solid #050505;">
                         </div>
                     </div>
@@ -104,6 +107,7 @@
                             tailored to your specific investment
                             needs.
                         </p>
+
                         <a href="{% url 'consult:book_appointment' %}">
                             <button class="filled-btn-lg">Book Consultation</button>
                         </a>
@@ -116,7 +120,7 @@
     <!-- Learn more  -->
     <div class="container-fluid learn-compound-div div-padding home-nav-bg-green a" id="">
         <div class="learn-video-holder b">
-            <h5>Learn more about compounding savings</h5>
+            <h5>Learn more about savings target</h5>
 
             <iframe src="https://www.youtube.com/embed/gyiiqUQgEeA?si=lqpbNwDjbN-zmzqC" title="YouTube video player"
                 frameborder="0"
@@ -134,7 +138,6 @@
 
 </main>
 
-
 <script>
     $(document).ready(function () {
         $('#form-container').on('submit', 'form', function (event) {
@@ -146,16 +149,16 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{% url "analyser:savings_calculator" %}',
+                url: '{% url "analyser:savings_target_calculator" %}',
                 data: formData,
                 success: function (response) {
                     if (response.success) {
                         // Display the result in the result-container
                         // $('#result-container').html('<p>Result: ' + response.result + '</p>');
 
-                        document.getElementById("initial_deposit").value = response.savings;
-                        document.getElementById("total_interest_paid").value = response.profit;
-                        document.getElementById("total_return").value = response.result;
+                        document.getElementById("monthly_savings").value = response.result;
+                        document.getElementById("my_savings").value = response.savings;
+                        document.getElementById("total_profit").value = response.profit;
 
                         // document.getElementById("earnings-div2").style.display = "block";
 

@@ -265,6 +265,30 @@ nav{
   border-radius: 0.625rem;
 }
 
+.main-nav .dropdown .dropdown-menu2{
+  margin: 0.5rem 0 0 -13% !important;
+  padding: 0.5rem 1rem 1rem !important;
+  min-width: 9.6vw !important;
+}
+
+.user-btn:hover{
+  color: var(--brand-green) !important;
+}
+
+.logout-btn{
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #051722;
+}
+
+.logout-btn:hover{
+  text-decoration: underline;
+}
+
 .main-nav .dropdown .dropdown-menu li a{
 	margin-bottom: 1rem;
   	padding-left: 0rem !important;
@@ -1623,9 +1647,42 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000328", en
   margin-bottom: 2.5rem;
 }
 
-.password-holder i{
+.password-holder2 .password-input{
+  width: 98.5%;
+}
+
+.password-holder i, .password-holder2 i{
   margin-left: -1.875rem; /*5.5%*/
   cursor: pointer;
+}
+
+.signin-p button{
+  margin-bottom: 1.5rem ;
+}
+
+.forgot-password{
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #109A9A;
+}
+
+.forgot-password:hover{
+  color: #0D344E;
+  text-decoration: underline;
+}
+
+.email-mb{
+  margin-bottom: 2.5rem;
+}
+
+.forgot-password-h5{
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #051722;
+  margin-bottom: 1rem;
 }
 
 .extra-signup-detail h5{
@@ -1643,6 +1700,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000328", en
 
 .extra-signup-detail h5 a:hover{
   color: #0D344E;
+  text-decoration: underline;
 }
 
 /* COMPOUND CALCULATOR */
@@ -3556,7 +3614,6 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000328", en
 
 .admin-content{
 	font-size: 1.125rem;
-	font-style: normal;
 	font-weight: 600;
 	line-height: 1.6875rem;
 	color: #0D344E;
@@ -3688,7 +3745,6 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000328", en
 .admin-table td a:hover{
 	color: var(--brand-green);
 }
-
 
 .admin-table .edit-td{
 	width: 9%;

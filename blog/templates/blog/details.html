@@ -7,8 +7,6 @@
 {% endblock %}
 
 
-
-
 {% block content %}
 
 <main class="main no-main">
@@ -19,7 +17,7 @@
     <!-- Blog Posts -->
     <div class="container-fluid blog-post-holder div-padding c">
         <h6>
-            <a href="blog.html">Blog</a>
+            <a href="{% url 'blog:posts' %}">Blog</a>
             &gt; <span>{{ post.title }}</span>
         </h6>
 

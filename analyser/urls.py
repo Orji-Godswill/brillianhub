@@ -7,6 +7,8 @@ app_name = 'analyser'
 urlpatterns = [
     path('savings_calculator/', views.savings_calculator_view,
          name='savings_calculator'),
-    # path('<slug:slug>/', views.blog_post_detail_view, name='post-detail'),
-
+    path('real_estate_roi/', views.return_on_real_estate_investment,
+         name='real_estate_roi'),
+    path('savings_target_calculator/', views.savings_target_calculator,
+         name="savings_target_calculator"),
 ]

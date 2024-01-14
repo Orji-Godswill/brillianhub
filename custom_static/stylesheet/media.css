@@ -262,6 +262,31 @@
     margin-bottom: 0.44rem;
   }
 
+  /* SCROLL ANIMATIONS */
+  .animationY {
+    opacity: 0;
+    transform: translateY(-2px) !important;
+    transition: all 0.7s ease-out;
+    transition-delay: 0.4s;
+  }
+
+  .scroll-animationY{
+    opacity: 1;
+    transform: translateY(0);
+  }
+.animationL {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.7s ease-out;
+  transition-delay: 0.4s;
+}
+
+.scroll-animationL{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
   /*who are we section*/
   .grid-container-who-are-we{
 	  display: block;
@@ -307,6 +332,10 @@
 	.grid-container-why-invest{
 	  display: block;
 	}
+
+  .why-invest-open{
+    background: var(--brand-green);
+  }
 
   .why-invest{
     box-sizing: border-box;
@@ -638,6 +667,11 @@
   .password-holder i{
     margin-left: -12%; /*5.5%*/
     cursor: pointer;
+  }
+
+  .forgot-password{
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
   }
 
   .extra-signup-detail h5{

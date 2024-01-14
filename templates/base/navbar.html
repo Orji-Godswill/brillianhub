@@ -39,10 +39,18 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item" href="real-estate-calculator.html">
+                                <a class="dropdown-item" href="{% url 'analyser:real_estate_roi' %}">
                                     <img src="{% static 'icons/nav-investment.svg' %}"
                                         class="img-fluid icon-course">&nbsp;
                                     <span>Real Estate Investment Calculator</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="{% url 'analyser:savings_target_calculator' %}">
+                                    <img src="{% static 'icons/nav-investment.svg' %}"
+                                        class="img-fluid icon-course">&nbsp;
+                                    <span>Savings Target Calculator</span>
                                 </a>
                             </li>
                         </ul>
@@ -53,23 +61,36 @@
                 </li>
 
                 {% if request.user.is_authenticated %}
-                <li class="btn-link">
-                    <a href="{% url 'accounts:account-home' %}" class="account_btn">My Account
-                    </a>
+                <li>
+                    <div class="dropdown account_btn">
+                        <button class="user-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="{% static 'icons/account_circle.svg' %}" class="img-fluid">
+                            &nbsp;
+                            {% if request.profile %}
+                            {{ request.user.profile.firstname }}
+                            {% else %}
+                            Complete Your Profile
+                            {% endif %}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu2" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a href="{% url 'accounts:account-home' %}">My Account</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'accounts:logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'accounts:account-home' %}">My Portfolio</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li> -->
+                </li>
+
                 {% else %}
                 <li class="btn-link">
-                    <a href="{% url 'accounts:account-home' %}" class="account_btn">Login
+                    <a href="{% url 'accounts:login' %}" class="account_btn">Login
                     </a>
                 </li>
-
-                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Sign up</a></li> -->
                 {% endif %}
-
-
-
             </ul>
         </div>
     </nav>
