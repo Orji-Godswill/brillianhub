@@ -21,48 +21,21 @@ class QuestionDetailView(DetailView):
         context = super().get_context_data(pk=None, **kwargs)
         question = self.object
 
+        course = Course.objects.all()
+
         count = 0
         next_question = question.get_next_question()
-        context['next_question'] = next_question
 
-        course = Course.objects.all()
-        context['course'] = course
+        progress_bar = (question.order) * 10
+
         module = question.module
+
+        context['next_question'] = next_question
+        context['progress_bar'] = progress_bar
+        context['course'] = course
         context['module'] = module
 
         return context
-
-    def update_progress_bar(request):
-        current_value = int(request.POST.get('current_value', 0))
-        print(current_value)
-
-
-class QuestionsDetailView(DetailView):
-    model = Question
-    template_name = 'quiz/question_content.html'
-    context_object_name = 'question'
-
-    def get(self, request, *args, **kwargs):
-        question = self.get_object()
-
-        count = 0
-        next_question = question.get_next_question()
-
-        course = Course.objects.all()
-
-        # Create a dictionary to serialize as JSON
-        json_response = {
-            'next_question': {
-                'id': next_question.id,
-                # 'content': next_question.content,
-                # Add other fields as needed
-            },
-            'course': [{'id': c.id, 'title': c.title} for c in course],
-            # Adjust fields accordingly
-            'module': {'id': question.module.id, 'title': question.module.title},
-        }
-
-        return JsonResponse(json_response)
 
 
 quiz_score = {}
@@ -97,14 +70,28 @@ def check_answer(request):
     return JsonResponse({'error': 'Invalid request'})
 
 
+def show_score(request):
+    pass
+
+
 def quiz_complete(request):
 
     user_quiz_score = 0
     if request.user in quiz_score:
         user_quiz_score = quiz_score[request.user] * 10
 
+    last_question_id = int(request.POST.get('last_question_id'))
+    last_question_order = int(request.POST['last_question_order'])
+    first_question_id = last_question_id - (last_question_order - 1)
+
+    last_question_course_id = request.POST['last_question_course_id']
+    last_question_course_slug = request.POST['last_question_course_slug']
+
     context = {
         'user_quiz_score': user_quiz_score,
+        'first_question_id': first_question_id,
+        'last_question_course_id': last_question_course_id,
+        'last_question_course_slug': last_question_course_slug
     }
 
     return render(request, 'quiz/quiz_complete.html', context)

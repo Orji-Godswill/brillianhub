@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('percentage-completion/<int:course_id>/',
          views.percentage_completion, name='percentage_completion'),
-    path('confirm-completion/<int:topic_id>/',
-         views.confirm_completion, name='confirm_completion'),
+    #     path('confirm-completion/<int:topic_id>/',
+    #          views.confirm_completion, name='confirm_completion'),
 
 ]

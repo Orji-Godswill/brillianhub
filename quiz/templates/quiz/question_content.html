@@ -73,7 +73,8 @@
                                 <div class="grid-container-progress2 p-0 b mb-0">
                                     <div class="progress " role="progressbar" aria-label="Success example"
                                         aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar bg-dark-blue" id="myProgressBar" style="width: 10%">
+                                        <div class="progress-bar bg-dark-blue" id="myProgressBar"
+                                            style="width: {{ progress_bar }}%">
                                         </div>
                                     </div>
 
@@ -146,21 +147,31 @@
                             </h4>
                             <p>{{ question.description }}</p>
 
+
+
                             <p class="text-end mb-0">
+
+
                                 {% if next_question %}
                                 <a href="{% url 'quiz:question_content' pk=next_question.pk %}">
                                     <button type="submit" class="filled-btn-lg ">
                                         Next Question
                                     </button>
                                 </a>
+                                {% else %} <br />
+                            <form method="post" action="{% url 'quiz:quiz_complete' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="last_question_id" value="{{ question.id }}">
+                                <input type="hidden" name="last_question_order" value="{{ question.order }}">
+                                <input type="hidden" name="last_question_course_id" value="{{ question.course.id }}">
+                                <input type="hidden" name="last_question_course_slug"
+                                    value="{{ question.course.slug }}">
 
-                                {% else %}
-                                <a href="{% url 'quiz:quiz_complete' %}">
-                                    <button type="submit" class="filled-btn-lg ">
-                                        Complete Quiz
-                                    </button>
-                                </a>
-                                {% endif %}
+                                <button type="submit" class="filled-btn-lg">
+                                    Complete Quiz
+                                </button>
+                            </form>
+                            {% endif %}
                             </p>
                         </div>
                     </div>
@@ -177,38 +188,32 @@
     $(document).ready(function () {
         $("#submitBtn").prop("disabled", true);
 
-        // Listen for changes in the radio buttons
         $("input[name='choice']").change(function () {
-            // Check if at least one radio button is selected
             var isAnyRadioButtonSelected = $("input[name='choice']").is(":checked");
 
-            // Enable or disable the submit button based on the selection status
+            console.log(isAnyRadioButtonSelected)
             $("#submitBtn").prop("disabled", !isAnyRadioButtonSelected);
         });
 
         $("#submitBtn").click(function () {
-            // Get the value of the selected radio button
             var selectedChoice = $("input[name='choice']:checked").val();
             var questionId = $('#questionId').val();
-
             var csrftoken = $("[name=csrfmiddlewaretoken]").val();
 
             $.ajax({
                 method: 'POST',
-                url: '{% url "quiz:check_answer" %}',  // Replace with your actual URL
+                url: '{% url "quiz:check_answer" %}',
 
                 data: {
                     'selectChoice': selectedChoice,
                     'question_id': questionId,
-                    csrfmiddlewaretoken: csrftoken  // Include CSRF token in data payload
+                    csrfmiddlewaretoken: csrftoken
                 },
 
                 headers: {
                     'X-CSRFToken': csrftoken
                 },
                 success: function (response) {
-                    // Handle the response as needed
-                    console.log(response);
                     if (response['is_correct'] === true) {
                         $("#descriptionParagraph").show();
                         $("#wrong-answer").hide();
@@ -221,17 +226,13 @@
                 },
                 error: function (error) {
                     console.log(error);
-                    // Handle the error as needed
                 }
             });
 
-            // Show the description page
         });
 
-
     });
+
 </script>
-
-
 
 {% endblock %}

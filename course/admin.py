@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course, Module, Topic, Content
+from .models import Course, Objective, Module, Topic, CompletedTopic, Content
 
 
 class ModuleInline(admin.TabularInline):
@@ -20,6 +20,11 @@ class ContentInline(admin.TabularInline):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     inlines = [ModuleInline, TopicInline, ContentInline]
+
+
+admin.site.register(Objective)
+
+admin.site.register(CompletedTopic)
 
 
 # @admin.register(Module)

@@ -8,7 +8,7 @@ from course.models import Course
 
 
 def index_view(request):
-    course = Course.objects.all()
+    course = Course.objects.all()[:3]
 
     context = {
         'course': course,

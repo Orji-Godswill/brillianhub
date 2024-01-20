@@ -6,13 +6,14 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from django.db.models import Count
-from .models import Course, Module, Topic, Content
+from .models import Course, Module, Topic, CompletedTopic, Content
 from django.views.generic.base import TemplateResponseMixin, View
 from quiz.models import Question
 from quiz.views import quiz_score
 from bs4 import BeautifulSoup
 from students.forms import CourseEnrollForm
 from students.models import Student
+from django.http import JsonResponse
 
 
 def count_words(text):
@@ -36,36 +37,64 @@ class CourseDetailView(DetailView):
     template_name = "courses/course_details.html"
     context_object_name = 'course'
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     module = self.get_object()
-
-    #     student_courses = Course.objects.all().filter(
-    #         students__in=[self.request.user])
-
-    #     if module.course not in student_courses.all():
-    #         print("enrolled")
-
-    #     return super().dispatch(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        course = self.get_object()
         context['modules'] = self.object.module_set.all()
 
         related_courses = Course.objects.all()
-
         context['related_courses'] = related_courses
+
+        completed_topics = CompletedTopic.objects.filter(
+            user=self.request.user, topic__course=course, completed=True
+        )
+
+        my_courses = Course.objects.all().filter(
+            students__in=[self.request.user])
+
+        context['my_courses'] = my_courses
+
+        completed_topic_ids = set(
+            completed_topic.topic.id for completed_topic in completed_topics)
+
+        topic_completion_dict = {
+            topic.id: topic.id in completed_topic_ids for module in context['modules'] for topic in module.topic_set.all()}
+
+        completed_topics_count = completed_topics.count()
+        total_topics_course = Topic.objects.filter(course__id=course.id)
+
+        try:
+            percentage_completion = round((
+                (completed_topics_count / total_topics_course.count()) * 100), 2)
+        except:
+            percentage_completion = 0.00
+
+        context['completed_topics_count'] = completed_topics_count
+        context['percentage_completion'] = percentage_completion
+        context['topic_completion_dict'] = topic_completion_dict
 
         course_title = self.object
         total_count = course_title.get_topic_count_for_course()
 
         context['form'] = CourseEnrollForm(initial={'course': self.object})
-
         context['total_count'] = total_count
 
         return context
 
 
-class TopicDetailView(LoginRequiredMixin, DetailView):
+class CompletionMixin(LoginRequiredMixin, View):
+    def update_completion_status(self, topic):
+        completed_topic, created = CompletedTopic.objects.get_or_create(
+            user=self.request.user,
+            topic=topic
+        )
+
+        if not created and not completed_topic.completed:
+            completed_topic.completed = True
+            completed_topic.save()
+
+
+class TopicDetailView(CompletionMixin, DetailView):
     model = Topic
     template_name = 'courses/topic_content.html'
     context_object_name = 'topic'
@@ -78,6 +107,8 @@ class TopicDetailView(LoginRequiredMixin, DetailView):
 
         if topic.module.course not in student_courses.all():
             return redirect('home')
+
+        self.update_completion_status(topic)
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -94,7 +125,12 @@ class TopicDetailView(LoginRequiredMixin, DetailView):
         if quiz_score:
             quiz_score.clear()
 
-        context['next_topic'] = topic.get_next_topic()
+        try:
+            context['next_topic'] = topic.get_next_topic()
+        except:
+            context['next_topic'] = None
+
+
         context['previous_topic'] = topic.get_previous_topic()
 
         related_courses = Course.objects.all()
@@ -108,38 +144,29 @@ class TopicDetailView(LoginRequiredMixin, DetailView):
 
         return context
 
-# class TopicDetailView(DetailView):
-#     model = Topic
-#     template_name = 'courses/topic_content.html'
-#     context_object_name = 'topic'
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
+class CompletedTopicsView(LoginRequiredMixin, View):
+    template_name = 'courses/completed_topics.html'
 
-#         topic = self.object
-#         module = topic.module
-#         content = get_object_or_404(Content, topic__id=topic.id)
-#         topic_duration = round(count_words(content.text_content)/200)
+    def get(self, request, course_id):
+        user = self.request.user
+        course = get_object_or_404(Course, id=course_id)
 
-#         if len(quiz_score) > 0:
-#             quiz_score.clear()
+        completed_topics = CompletedTopic.objects.filter(
+            user=user,
+            topic__course=course,
+            completed=True
+        )
 
-#         context['next_topic'] = topic.get_next_topic()
-#         context['previous_topic'] = topic.get_previous_topic()
+        completed_topics_count = completed_topics.count()
 
-#         related_courses = Course.objects.all()
-#         context['next_module'] = module.get_next_module()
+        total_topics_course = Topic.objects.filter(course__id=course.id)
 
-#         question = Question.objects.filter(module__id=module.id).first()
-
-#         context['question'] = question
-#         context['module'] = module
-
-#         context['topic_duration'] = topic_duration
-
-#         context['related_courses'] = related_courses
-
-#         return context
+        return render(request, self.template_name, {
+            'course': course,
+            'completed_topics': completed_topics,
+            'completed_topics_count': completed_topics_count,
+        })
 
 
 class FeaturedCourseView(ListView):

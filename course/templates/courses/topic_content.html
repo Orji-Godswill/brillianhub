@@ -31,7 +31,10 @@
                     <div class="container-fluid last-lesson-div l-lesson-div2 home-nav-bg-white c">
                         <div class="grid-container-last-lesson next-lesson-div p-0">
                             <div>
-                                <h6>
+                                <h5>
+                                    Course: {{ module.course }}
+                                </h5><br />
+                                <h6 style="font-style: italic;">
                                     Module {{ module.order }} - {{ topic.title }}
                                 </h6>
                                 <p class="mb-0">
@@ -39,7 +42,7 @@
                                 </p>
                             </div>
 
-                            <div class="continue-btn-div start desktop b">
+                            <!-- <div class="continue-btn-div start desktop b">
                                 <p class="mb-0">
                                     <a href="lesson.html">
                                         <button class="ybtn">
@@ -48,7 +51,7 @@
                                         </button>
                                     </a>
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
 
                         <!-- Lesson Details -->
@@ -68,7 +71,6 @@
                             {% endif %}
 
                         </div>
-
                         <!-- Next or Previous button -->
                         <div class="container-fluid next-prev-div p-0 b">
                             {% if previous_topic %}
@@ -97,11 +99,23 @@
                                     </h6>
                                 </div>
                             </a>
-                            {% else %}
+                            {% elif question %}
                             <a href="{% url 'quiz:question_content' pk=question.pk %}" class="alignright">
                                 <div class="prev-div">
                                     <h5>
-                                        Go to <span class="desktop">Test</span> &nbsp;
+                                        Take <span class="desktop">Quiz</span> &nbsp;
+                                        <img src="{% static 'icons/next_lesson.svg' %}" class="img-fluid">
+                                    </h5>
+                                    <h6 class="desktop">
+                                        {{ module.title }}
+                                    </h6>
+                                </div>
+                            </a>
+                            {% else %}
+                            <a href="#" class="alignright">
+                                <div class="prev-div">
+                                    <h5>
+                                        Continue <span class="desktop">Learning</span> &nbsp;
                                         <img src="{% static 'icons/next_lesson.svg' %}" class="img-fluid">
                                     </h5>
                                     <h6 class="desktop">
@@ -112,8 +126,6 @@
                             {% endif %}
                             <div class="clr"></div>
                         </div>
-
-
                     </div>
 
                 </div>

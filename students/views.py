@@ -1,10 +1,9 @@
-from django.shortcuts import get_object_or_404
 from .models import Student, Course, Module
 from django.views.generic import ListView
 from typing import Any
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from course.models import Course, Module, Topic
+from course.models import Course, Module, Topic, CompletedTopic
 from .models import Student
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -45,25 +44,26 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
         result_dict = {}
 
         for course in my_courses:
-            total_modules = Module.objects.filter(course_id=course.id).count()
-            completed_modules = student.completed_modules.filter(course=course)
-            num_completed_modules = completed_modules.count()
+            total_topics = Topic.objects.filter(course_id=course.id).count()
+            completed_topics = student.completed_topics.filter(course=course)
+
+            num_completed_topics = completed_topics.count()
 
             percentage_completion = (
-                num_completed_modules / total_modules) * 100 if total_modules > 0 else 0
+                num_completed_topics / total_topics) * 100 if total_topics > 0 else 0
 
             percentage_completion = round(percentage_completion, 2)
 
             if student.user not in result_dict:
                 result_dict[student.user] = {course.title: {
-                    'total_modules': total_modules,
-                    'completed_modules': num_completed_modules,
+                    'total_topics': total_topics,
+                    'completed_topics': num_completed_topics,
                     'percentage_completion': percentage_completion
                 }}
             else:
                 result_dict[student.user][course.title] = {
-                    'total_modules': total_modules,
-                    'completed_modules': num_completed_modules,
+                    'total_topics': total_topics,
+                    'completed_topics': num_completed_topics,
                     'percentage_completion': percentage_completion
                 }
 
@@ -71,30 +71,32 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
         return context
 
 
-@login_required
-def confirm_completion(request, topic_id):
-    student = Student.objects.get(user=request.user)
-    topic = get_object_or_404(Topic, pk=topic_id)
+# @login_required
+# def confirm_completion(request, topic_id):
+#     student = Student.objects.get(user=request.user)
+#     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if topic not in student.completed_topics.all():
-        student.completed_topics.add(topic)
-        student.save()
+#     if topic not in student.completed_topics.all():
+#         student.completed_topics.add(topic)
+#         student.save()
 
-    # You can return a JsonResponse or redirect to a different page as needed
-    return JsonResponse({'message': 'Completion confirmed'})
+#     # You can return a JsonResponse or redirect to a different page as needed
+#     return JsonResponse({'message': 'Completion confirmed'})
 
 
-@login_required
 def percentage_completion(request, course_id):
     student = Student.objects.get(user=request.user)
     course = Course.objects.get(pk=course_id)
     topics = Topic.objects.filter(course=course)
+    completed_topics = CompletedTopic.objects.filter(
+        user=student, topic__course=course, completed=True)
 
     completed_topics = [
         topic for topic in topics if topic.is_completed_by(student)]
     completion_percentage = (len(completed_topics) /
                              len(topics)) * 100 if len(topics) > 0 else 0
 
+    print(completion_percentage)
     context = {
         'course': course,
         'completion_percentage': completion_percentage
@@ -107,11 +109,12 @@ def calculate_completion(request, student_id, pk):
     student_courses = Course.objects.filter(student_id=student_id)
 
     course = get_object_or_404(Course, pk=pk)
-    modules = Module.objects.filter(module__id=course.id)
+    completed_topics = CompletedTopic.objects.filter(
+        user=request.user, topic__course=course, completed=True)
 
-    total_modules = Module.objects.count()
-    completed_modules = student_courses.count()
+    total_topics = Topic.objects.count()
+    completed_topics = student_courses.count()
 
-    completion_percentage = (completed_modules / total_modules) * 100
+    completion_percentage = (completed_topics / total_topics) * 100
 
     return JsonResponse({'completion_percentage': completion_percentage})

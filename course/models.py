@@ -149,6 +149,17 @@ class Topic(models.Model):
         return previous_topic
 
 
+class CompletedTopic(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, related_name='user_completed_topic')
+    topic = models.ForeignKey(
+        Topic, on_delete=models.CASCADE, related_name='completed_topics')
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.topic}"
+
+
 class Content(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name='contents')

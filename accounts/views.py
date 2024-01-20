@@ -1,7 +1,7 @@
-from django.views.generic import CreateView, FormView, DetailView, View
+from django.views.generic import CreateView, FormView, ListView, View
 from django.contrib.auth import authenticate, login, get_user_model
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -17,6 +17,9 @@ from django.utils.http import is_safe_url
 from brillianzhub.mixins import NextUrlMixin, RequestFormAttachMixin
 from referral.models import Referrer, Earn
 
+
+from course.models import Course, Topic
+from students.models import Student
 # Create your views here.
 
 
@@ -25,11 +28,53 @@ def account_home_view(request):
     return render(request, "accounts/home.html", {})
 
 
-class AccountHomeView(LoginRequiredMixin, DetailView):
+class AccountHomeView(LoginRequiredMixin, ListView):
+    model = Course
     template_name = 'users/home.html'
 
     def get_object(self):
         return self.request.user
+
+    def get_queryset(self):
+        qs = super(AccountHomeView, self).get_queryset()
+        return qs.filter(students__in=[self.request.user])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        student = get_object_or_404(Student, user=self.request.user)
+
+        my_courses = Course.objects.all().filter(
+            students__in=[self.request.user])
+
+        result_dict = {}
+
+        for course in my_courses:
+            total_topics = Topic.objects.filter(course_id=course.id).count()
+            completed_topics = student.completed_topics.filter(course=course)
+
+            num_completed_topics = completed_topics.count()
+
+            percentage_completion = (
+                num_completed_topics / total_topics) * 100 if total_topics > 0 else 0
+
+            percentage_completion = round(percentage_completion, 2)
+
+            if student.user not in result_dict:
+                result_dict[student.user] = {course.title: {
+                    'total_topics': total_topics,
+                    'completed_topics': num_completed_topics,
+                    'percentage_completion': percentage_completion
+                }}
+            else:
+                result_dict[student.user][course.title] = {
+                    'total_topics': total_topics,
+                    'completed_topics': num_completed_topics,
+                    'percentage_completion': percentage_completion
+                }
+
+        context['result'] = result_dict
+        return context
 
 
 class AccountEmailActivationView(FormMixin, View):

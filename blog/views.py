@@ -39,7 +39,6 @@ def blog_post_detail_view(request, *args, **kwargs):
     categories = Category.objects.all()
 
     post_tags_ids = post.tags.values_list('id', flat=True)
-    print(post_tags_ids)
     related_posts = Blog.objects.all().published().filter(
         tags__in=post_tags_ids).exclude(id=post.id)
     related_posts = related_posts.annotate(same_tags=Count(

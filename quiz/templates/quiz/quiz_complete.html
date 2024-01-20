@@ -90,7 +90,8 @@
                                         Way to go! You’re doing a <br class="phone">great job
                                     </p>
 
-                                    <a href="{% url 'student:completed_module' pk=module.pk %}">
+                                    <a
+                                        href="{% url 'course:course_detail' pk=last_question_course_id slug=last_question_course_slug %}">
                                         <button class="filled-btn">
                                             Complete Module
                                         </button>
@@ -106,13 +107,13 @@
                                         You didn't reach the pass mark of 70%. Would you like to retry the <br
                                             class="phone">incorrect questions?
                                     </p>
-
-                                    <a href="#">
+                                    <a href="{% url 'quiz:question_content' pk=first_question_id %}">
                                         <button class="out-fill-btn btnS">
                                             Retry
                                         </button>
                                     </a>
-                                    <a href="#">
+                                    <a
+                                        href="{% url 'course:course_detail' pk=last_question_course_id slug=last_question_course_slug %}">
                                         <button class="filled-btn">
                                             Continue Learning
                                         </button>
