@@ -112,7 +112,8 @@
                                 </div>
                             </a>
                             {% else %}
-                            <a href="#" class="alignright">
+                            <a href="{% url 'course:course_detail' pk=module.course.id slug=module.course.slug %}"
+                                class="alignright">
                                 <div class="prev-div">
                                     <h5>
                                         Continue <span class="desktop">Learning</span> &nbsp;

@@ -2,8 +2,17 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from taggit.models import Tag
 import math
-from . forms import SavingsCalculationForm, SavingsTargetForm
+from . forms import SavingsCalculationForm, SavingsTargetForm, StockReturnForm
 from django.http import JsonResponse
+from datetime import datetime, timedelta
+
+from . import utils
+
+
+def one_year_ago_from_today():
+    today = datetime.today()
+    one_year_ago = today - timedelta(days=365)
+    return one_year_ago
 
 
 def savings_calculator_view(request):
@@ -95,9 +104,69 @@ def savings_target_calculator(request):
     return render(request, 'analyser/savings_target.html', context)
 
 
+def return_on_stock_investment(request):
+    context = {}
+    invested_amount = 1000
+    if request.method == 'POST':
+        form = StockReturnForm(request.POST)
+        if form.is_valid():
+            symbol = request.POST['symbol'].upper()
+            invested_amount = float(request.POST['invested_amount'])
+            time_period = request.POST.get('time_period')
+
+            if time_period == 'one_month':
+                start_date = utils.one_month_from_today().strftime('%Y-%m-%d')
+                period = 21
+            elif time_period == 'one_year':
+                start_date = utils.one_year_from_today().strftime('%Y-%m-%d')
+                period = 252
+            elif time_period == 'two_year':
+                start_date = utils.two_years_from_today().strftime('%Y-%m-%d')
+                period = 252 * 2
+            elif time_period == 'five_year':
+                start_date = utils.five_years_from_today().strftime('%Y-%m-%d')
+                period = 252 * 5
+            else:
+                start_date = one_year_ago_from_today().strftime('%Y-%m-%d')
+                period = 252
+
+            end_date = utils.today
+
+            stock_ticker, x_data, y_data, average_return = utils.analyse_stock_data(
+                symbol, start_date, end_date)
+
+            pct_return = average_return * period * 100
+            pct_return = round(pct_return, 2)
+            investment_return = pct_return * 0.01 * invested_amount
+            investment_return = round(investment_return, 2)
+            total_return = round((invested_amount + investment_return), 2)
+
+            chart = utils.get_plot(x_data, y_data)
+            context = {
+                'success': True,
+                'chart': chart,
+                'stock_ticker': stock_ticker,
+                'invested_amount': invested_amount,
+                'pct_return': pct_return,
+                'investment_return': investment_return,
+                'total_return': total_return,
+            }
+            return JsonResponse(context)
+        else:
+            return JsonResponse({'errors': form.errors}, status=400)
+    else:
+        form = StockReturnForm()
+
+    context = {
+        'form': form,
+        'invested_amount': invested_amount
+    }
+
+    return render(request, 'analyser/stock_return.html', context)
+
+
 def return_on_real_estate_investment(request):
 
     context = {
-
     }
     return render(request, 'analyser/real_estate_roi.html', context)

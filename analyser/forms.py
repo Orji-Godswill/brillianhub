@@ -51,3 +51,8 @@ class SavingsTargetForm(forms.Form):
         label="How long in years do you plan to save?", initial=5)
     interest_rate = forms.FloatField(label="Interest rate %", initial=5)
     rate_of_return = forms.ChoiceField(choices=return_frequency)
+
+
+class StockReturnForm(forms.Form):
+    symbol = forms.CharField(label='Stock Symbol', max_length=10)
+    invested_amount = forms.FloatField(label='Amount invested', initial=1000)

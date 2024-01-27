@@ -1,0 +1,45 @@
+<form id="calculator1_form" , method="post" action="{% url 'analyser:stock_return' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div id="div_id_symbol" class="style-form form-mb">
+        <label for="id_initial_deposit" class="form-label requiredField">
+            Stock Symbol<span class="asteriskField">*</span>
+        </label>
+        <div>
+            <input type="text" name="symbol" maxlength="10" class="numberinput form-control" required id="id_symbol"
+                style="border: 1px solid #050505;">
+        </div>
+    </div>
+
+    <div id="div_id_invested_amount" class="style-form form-mb">
+        <label for="id_initial_deposit" class="form-label requiredField">
+            Amount invested<span class="asteriskField">*</span>
+        </label>
+        <div>
+            <input type="text" name="invested_amount" value="1000" step="any" class="numberinput form-control" required
+                id="id_invested_amount" style="border: 1px solid #050505;">
+        </div>
+    </div>
+
+    <p class="text-end mb-0">
+        <button type="submit" name="time_period" value="one_month" class="filled-btn-lg">
+            1 month
+        </button>
+    </p> <br />
+    <p class="text-end mb-0">
+        <button type="submit" name="time_period" value="one_year" class="filled-btn-lg">
+            1 year
+        </button>
+    </p><br />
+    <p class="text-end mb-0">
+        <button type="submit" name="time_period" value="two_year" class="filled-btn-lg">
+            2 years
+        </button>
+    </p><br />
+    <p class="text-end mb-0">
+        <button type="submit" name="time_period" value="five_year" class="filled-btn-lg">
+            5 years
+        </button>
+    </p>
+</form>

@@ -1642,9 +1642,12 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000328", en
   color: white;
 }
 
+.password-mb{
+  margin-bottom: 2.5rem;
+}
+
 .password-holder .password-input{
   width: 98.5%;
-  margin-bottom: 2.5rem;
 }
 
 .password-holder2 .password-input{

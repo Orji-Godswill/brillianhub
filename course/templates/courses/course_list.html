@@ -15,9 +15,15 @@
                     <h2>Courses</h2>
                     <ul>
                         {% for obj in courses %}
+                        {% if request.user.is_authenticated %}
                         <li class="#">
                             <a href="{% url 'course:course_detail' pk=obj.pk slug=obj.slug %}">{{ obj.title }}</a>
                         </li>
+                        {% else %}
+                        <li class="#">
+                            <a href="{% url 'home' %}">{{ obj.title }}</a>
+                        </li>
+                        {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
@@ -78,7 +84,7 @@
                                     </div>
 
                                     <div class="description-div">
-                                        <p class="course-description">{{ course.description }}</p>
+                                        <p class="course-description">{{ course.description|truncatechars:145 }}</p>
                                     </div>
 
                                     <h6 class="alignleft">

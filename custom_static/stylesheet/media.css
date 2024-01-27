@@ -660,7 +660,7 @@
   }
 
   .password-holder .password-input{
-    width: 100%;
+    width: 98.4%;
     margin-bottom: 2.5rem;
   }
 
@@ -2726,7 +2726,7 @@
 	}
 
   .main{
-    margin-top: 18.84vh !important;
+    margin-top: 3.9% !important;  /* 11.2vh */
   }
 
 	.course-img-holder{

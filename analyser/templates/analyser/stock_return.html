@@ -11,28 +11,28 @@
         <div class="grid-container-contact-div div-padding">
             <div class="calculator-bg first-div-deatils  img-holder b">
                 <div class="container-fluid signup-holder2">
-                    <h2>Investor’s <br>Calculator</h2>
+                    <h2>Stock Return's <br>Calculator</h2>
                 </div>
             </div>
 
             <div class="form-holder-div2 disclaimer-div-holder c">
                 <div class="container-fluid disclaimer-div disclaimer-div1 c">
-                    <h5>Return on Investment on Real Estate Calculator</h5>
+                    <h5>Return on Investment on Stock</h5>
                     <p>
-                        A real estate ROI calculator helps investors assess and visualize the potential return on their
-                        real estate investments.
+                        Investors can project and visualize the expected growth or return of their stock investments
+                        with the help of our stock return calculator.
                     </p>
 
                     <p class="disclaimer-p">
-                        Key factors like purchase price, rental income, appreciation rate, and holding period help users
-                        evaluate real estate investments. This tool facilitates informed decisions and aligns real
-                        estate holdings with financial goals
+                        By inputting the investment amount, the stock symbol (for example, AMZN for Amazon
+                        Inc.), and selecting the investment duration buttons. With the aid of this tool, people can make
+                        wise investment choices and match their stock holdings to their long-term financial goals.
                     </p>
                 </div>
 
                 <div id="form-container" class="container-fluid form-details c">
 
-                    {% include 'snippets/compound_savings_form.html' %}
+                    {% include 'snippets/stock_return_form.html' %}
 
                 </div>
             </div>
@@ -68,19 +68,22 @@
                 <div class="container-fluid form-details c" style="background: #F3FDFD;">
                     <div class="container-fluid earnings-div p-0">
                         <div class="style-form form-mb">
-                            <label class="form-label">Total Savings</label>
-                            <input type="text" class="form-control" id="initial_deposit" readonly
+                            <label class="form-label">Expected average return for the period (%)</label>
+                            <input type="text" class="form-control" id="pct_return" readonly
                                 style="border: 1px solid #050505;">
                         </div>
-
                         <div class="style-form form-mb">
-                            <label class="form-label">Total Interest Paid</label>
-                            <input type="text" class="form-control" id="total_interest_paid" readonly
+                            <label class="form-label" id="expected_average_return">Expected average profit for $1000.00
+                                invested within
+                                this period
+                                ($)</label>
+                            <input type="text" class="form-control" id="return_on_investment" readonly
                                 style="border: 1px solid #050505;">
                         </div>
-
                         <div class="style-form form-mb">
-                            <label class="form-label">Total Return</label>
+                            <label class="form-label" id="expected_total_return">Total return on
+                                investment
+                                ($)</label>
                             <input type="text" class="form-control" id="total_return" readonly
                                 style="border: 1px solid #050505;">
                         </div>
@@ -116,7 +119,7 @@
     <!-- Learn more  -->
     <div class="container-fluid learn-compound-div div-padding home-nav-bg-green a" id="">
         <div class="learn-video-holder b">
-            <h5>Learn more about compounding savings</h5>
+            <h5>Learn more about returns on investment on stocks</h5>
 
             <iframe src="https://www.youtube.com/embed/gyiiqUQgEeA?si=lqpbNwDjbN-zmzqC" title="YouTube video player"
                 frameborder="0"
@@ -130,18 +133,80 @@
             </a>
         </div>
 
-        <div class="learn-video-holder b">
-            <h5>Learn more about compounding savings</h5>
+        <div id="chart-container" class="learn-video-holder b">
+            <h5>Learn more about returns on investment on stocks</h5>
+        </div>
+    </div>
 
-            {% if chart %}
-            <img src="data:image/png;base64, {{chart|safe}}">
-            {% endif %}
+
+    <div class="container-fluid learn-compound-div div-padding home-nav-bg-green a" id="">
+        <div class="learn-video-holder b">
+            <h5>Learn more about returns on investment on stocks</h5>
+
+
         </div>
 
+        <div id="sticker-container" class="learn-video-holder b">
+            <h5>Learn more about returns on investment on stocks</h5>
+        </div>
     </div>
 
 
 </main>
 
+
+<script>
+    $(document).ready(function () {
+        $('#form-container').on('submit', 'form', function (event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            // Get the value of the clicked button and append it to the FormData
+            var clickedButton = $(document.activeElement);
+            formData.append(clickedButton.attr('name'), clickedButton.val());
+
+            console.log(formData);
+
+            var response_show = document.getElementById("response_container");
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "analyser:stock_return" %}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.success) {
+
+                        if (response.chart) {
+                            $('#chart-container').html('<img src="data:image/png;base64, ' + response.chart + '" alt="Stock Chart">');
+                        }
+
+                        if (response.stock_ticker) {
+                            $('#sticker-container').html('<p>' + response.stock_ticker + '</p>');
+                        }
+
+                        $('#expected_average_return').html('Expected average profit for $' + response.invested_amount + '.00 invested within this period');
+
+                        document.getElementById("pct_return").value = response.pct_return;
+                        document.getElementById('return_on_investment').value = response.investment_return;
+                        document.getElementById('total_return').value = response.total_return;
+
+                        response_show.scrollIntoView({ behavior: 'smooth' });
+
+                    } else if (response.errors) {
+                        alert('Form submission failed. Please correct the errors.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle other Ajax errors
+                    alert('An error occurred while submitting the form.');
+                }
+            });
+        });
+    });
+
+</script>
 
 {% endblock %}

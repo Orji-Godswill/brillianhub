@@ -130,13 +130,20 @@ class TopicDetailView(CompletionMixin, DetailView):
         except:
             context['next_topic'] = None
 
-
         context['previous_topic'] = topic.get_previous_topic()
 
         related_courses = Course.objects.all()
         context['next_module'] = module.get_next_module()
 
-        question = Question.objects.filter(module__id=module.id).first()
+        try:
+            question = Question.objects.get(
+                module=module, course=module.course, order=1)
+        except Question.DoesNotExist:
+            question = None
+        except Question.MultipleObjectsReturned:
+            question = None
+
+        print(question)
         context['question'] = question
         context['module'] = module
         context['topic_duration'] = topic_duration

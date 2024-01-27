@@ -290,4 +290,41 @@
 
 </main>
 
+
+<script type="text/javascript">
+    //window.onscroll = function() {myalert()};
+
+
+
+    let slideIndex = 0;
+    showSlides();
+    function currentSlide(n) {
+        alert(n);
+        //showSlides(slideIndex = n);
+    }
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("myTestimony");
+        let dot_icon = document.getElementsByClassName("dot-icon");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+            dot_icon[i].src = "icons/slide-icon-inactive.svg";
+            if (i == (slides.length - 1)) {
+                dot_icon[i].src = "icons/slide-icon-small.svg";
+            }
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        slides[slideIndex - 1].style.display = "block";
+        dot_icon[slideIndex - 1].src = "icons/slide-icon-active.svg";
+        setTimeout(showSlides, 5000); // Change image every 2 seconds
+    } 
+</script>
+
+<script type="text/javascript" src="js/ha.js"></script>
+<script src="bootstrap-5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
 {% endblock %}

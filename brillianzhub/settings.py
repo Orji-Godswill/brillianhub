@@ -121,6 +121,18 @@ WSGI_APPLICATION = 'brillianzhub.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Godyson$brillianzhub_data',
+#         'USER': 'Godyson',
+#         'PASSWORD': 'admin@brillianzhub',
+#         'HOST': 'Godyson.mysql.pythonanywhere-services.com',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
